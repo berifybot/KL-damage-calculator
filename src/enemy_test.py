@@ -19,6 +19,7 @@ class TestEnemy(unittest.TestCase):
         enemy.load(dragon_dict)
         self.assertEquals(enemy.name, dragon_dict['name'])
         self.assertEquals(enemy.max_health, dragon_dict['max_health'])
+        self.assertEquals(enemy.current_health, dragon_dict['max_health'])
         self.assertEquals(enemy.base_damage, dragon_dict['base_damage'])
         self.assertEquals(enemy.damage_type, dragon_dict['damage_type'])
         self.assertEquals(enemy.weaknesses, dragon_dict['weaknesses'])
