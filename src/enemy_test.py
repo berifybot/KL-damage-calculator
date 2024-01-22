@@ -17,11 +17,11 @@ class TestEnemy(unittest.TestCase):
     def test_load_creation(self):
         enemy = Enemy()
         enemy.load(dragon_dict)
-        self.assertEquals(enemy.name, "Dragon")
-        self.assertEquals(enemy.max_health, 500)
-        self.assertEquals(enemy.base_damage, 25)
-        self.assertEquals(enemy.damage_type, "melee")
-        self.assertEquals(enemy.weaknesses, ['water', 'melee'])
+        self.assertEquals(enemy.name, dragon_dict['name'])
+        self.assertEquals(enemy.max_health, dragon_dict['max_health'])
+        self.assertEquals(enemy.base_damage, dragon_dict['base_damage'])
+        self.assertEquals(enemy.damage_type, dragon_dict['damage_type'])
+        self.assertEquals(enemy.weaknesses, dragon_dict['weaknesses'])
 
 
 if __name__ == '__main__':
