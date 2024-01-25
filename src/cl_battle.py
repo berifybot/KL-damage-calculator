@@ -1,4 +1,5 @@
 import random
+from roll import Roll
 
 class CLBattle():
 
@@ -25,29 +26,13 @@ class CLBattle():
     def __execute_turn(self, damage_per_roll, attack_speed):
         attacks_left = attack_speed
         while attacks_left > 0:
-            die_roll = random.choice([1, 2, 3, 4, 5, 6])
+            roll = Roll(damage_per_roll)
             print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-            print("You rolled a {roll}.".format(roll = die_roll))
-            damage = self.__get_damage_from_roll(damage_per_roll, die_roll)
+            print("You rolled a {roll}.".format(roll = roll.roll))
+            damage = roll.execute_roll()
             self.enemy.current_health -= damage
             print("You dealt {damage} damage to the enemy!".format(damage = damage))
             print("The {enemy} now has {health} HP remaining".format(enemy = self.enemy.name, health = self.enemy.current_health))
             attacks_left -= 1
             input("Press 'Enter' to continue...")
             print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-
-    def __get_damage_from_roll(self, damage_per_roll, roll_value):
-        if (roll_value == 1):
-            return 0
-        elif (roll_value == 2):
-            return 0
-        elif (roll_value == 3):
-            return damage_per_roll / 2
-        elif (roll_value == 4):
-            return damage_per_roll
-        elif (roll_value == 5):
-            return damage_per_roll + 3
-        elif (roll_value == 6):
-            return damage_per_roll + 5
-        else:
-            print("Invalid Dice Value: {die_value}!!!".format(die_value = roll_value))
