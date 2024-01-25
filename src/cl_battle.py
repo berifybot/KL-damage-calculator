@@ -26,12 +26,11 @@ class CLBattle():
     def __execute_turn(self, damage_per_roll, attack_speed):
         attacks_left = attack_speed
         while attacks_left > 0:
-            roll = Roll(damage_per_roll)
+            roll = Roll(damage_per_roll, self.enemy)
+            roll.execute_roll()
             print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
             print("You rolled a {roll}.".format(roll = roll.roll))
-            damage = roll.execute_roll()
-            self.enemy.current_health -= damage
-            print("You dealt {damage} damage to the enemy!".format(damage = damage))
+            print("You dealt {damage} damage to the enemy!".format(damage = roll.damage_dealt))
             print("The {enemy} now has {health} HP remaining".format(enemy = self.enemy.name, health = self.enemy.current_health))
             attacks_left -= 1
             input("Press 'Enter' to continue...")
