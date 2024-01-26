@@ -5,14 +5,19 @@ die_roller = lambda: random.choice([1, 2, 3, 4, 5, 6])
 
 class Roll():
 
-    def __init__(self, damage, enemy, die_roller = die_roller):
+    def __init__(self, damage, enemy, attack_type, die_roller = die_roller):
         self.damage = damage
         self.enemy = enemy
+        self.attack_type = attack_type
         self.roll = die_roller()
 
     def execute_roll(self):
         self.damage_dealt = self.__get_damage_from_roll()
-        self.enemy.current_health -= self.damage_dealt
+        if self.attack_type in self.enemy.weaknesses:
+            self.damage_dealt += 10
+            self.enemy.current_health -= self.damage_dealt
+        else:
+            self.enemy.current_health -= self.damage_dealt
     
     def __get_damage_from_roll(self):
         if (self.roll == 1):
