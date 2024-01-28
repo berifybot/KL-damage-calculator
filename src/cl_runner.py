@@ -27,38 +27,13 @@ class CLRunner(Host):
             self.process_command(new_command)
             self.current_command = new_command
 
-    def get_roll(self) -> int:
-        return int(input("Enter roll value: "))
-    
-    def get_attack_speed(self) -> int:
-        return int(input("Enter attack speed: ") or 0)
-
-    def get_damage_per_roll(self) -> int:
-        return int(input("Enter damage per roll: ") or 0)
-
-    def get_attack_type(self) -> str:
-        attack_styles = ["magic", "range", "melee"]
-        attack_type = input("Please enter your attack style: ")
-        while attack_type not in attack_styles:
-            attack_type = input("Please enter your attack style: ")
-
-        return attack_type
-    
-    def report_roll_stats(self, roll_value, damage_dealt, enemy):
-        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-        print("You rolled a {roll}.".format(roll = roll_value))
-        print("You dealt {damage} damage to the enemy!".format(damage = damage_dealt))
-        print("The {enemy} now has {health} HP remaining".format(enemy = enemy.name, health = enemy.current_health))
-        input("Press 'Enter' to continue...")
-        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-
     def process_command(self, command) -> None:
         if command == WAITING_COMMAND:
             pass
         elif command == START_BATTLE_COMMAND:
             enemy_name = input("Choose enemy: ")
             enemy = self.__find_enemy(enemy_name)
-            CLBattle(enemy, self).run()
+            CLBattle(enemy).run()
         elif command == QUIT_COMMAND:
             print("Thanks for playing!")
         else:
