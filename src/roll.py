@@ -9,5 +9,7 @@ class Roll():
         return die_roller()
 
 
-    # Todo: Add defined_roll, passing in the host to perform the roll input
+    @classmethod
+    def defined_roll(cls, host) -> int:
+        return host.get_roll()
     

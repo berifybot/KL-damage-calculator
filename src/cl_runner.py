@@ -1,5 +1,6 @@
 from cl_battle import CLBattle
 from enemy import Enemy
+from host import Host
 
 WAITING_COMMAND = "w"
 START_BATTLE_COMMAND = "s"
@@ -13,7 +14,7 @@ temp_dragon_dict = {
         "weaknesses": ["water", "melee"]
     }
 
-class CLRunner():
+class CLRunner(Host):
     current_command = WAITING_COMMAND
     
     def run(self) -> None:
@@ -26,18 +27,20 @@ class CLRunner():
             self.process_command(new_command)
             self.current_command = new_command
 
+    def get_roll(self) -> int:
+        return int(input("Enter roll value: "))
+
     def process_command(self, command) -> None:
         if command == WAITING_COMMAND:
             pass
         elif command == START_BATTLE_COMMAND:
             enemy_name = input("Choose enemy: ")
             enemy = self.__find_enemy(enemy_name)
-            CLBattle(enemy).run()
+            CLBattle(enemy, self).run()
         elif command == QUIT_COMMAND:
             print("Thanks for playing!")
         else:
             print("{command} is not a valid command, please try again".format(command = command))
-
 
     def __find_enemy(self, enemy_name) -> Enemy:
         return Enemy(temp_dragon_dict)

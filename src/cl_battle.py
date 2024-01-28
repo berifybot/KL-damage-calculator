@@ -6,8 +6,9 @@ attack_styles = ["magic", "range", "melee"]
 
 class CLBattle():
 
-    def __init__(self, enemy):
+    def __init__(self, enemy, host):
         self.enemy = enemy
+        self.host = host
 
     def run(self) -> None:
         print("\nStarting battle with {enemy_name}".format(enemy_name = self.enemy.name))
@@ -73,4 +74,3 @@ class CLBattle():
             return damage + 5
         else:
             raise Exception("Invalid roll value")
-
