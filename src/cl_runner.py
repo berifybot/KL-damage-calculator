@@ -16,7 +16,7 @@ temp_dragon_dict = {
 class CLRunner():
     current_command = WAITING_COMMAND
     
-    def run(self):
+    def run(self) -> None:
         print("Welcome to the Kyrons Legacy Damage Calculator!\n"
               + "List of Commands:\n"
               + "\t s: Start Battle\n"
@@ -26,7 +26,7 @@ class CLRunner():
             self.process_command(new_command)
             self.current_command = new_command
 
-    def process_command(self, command):
+    def process_command(self, command) -> None:
         if command == WAITING_COMMAND:
             pass
         elif command == START_BATTLE_COMMAND:
@@ -39,7 +39,7 @@ class CLRunner():
             print("{command} is not a valid command, please try again".format(command = command))
 
 
-    def __find_enemy(self, enemy_name):
+    def __find_enemy(self, enemy_name) -> Enemy:
         return Enemy(temp_dragon_dict)
 
 if __name__ == "__main__":

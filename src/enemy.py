@@ -9,7 +9,7 @@ class Enemy():
     def __init__(self, enemy_dict = {}):
         self.load(enemy_dict)
 
-    def load(self, enemy_dict: dict):
+    def load(self, enemy_dict: dict) -> None:
         if ('name' in enemy_dict):
             self.name = enemy_dict['name']
         if ('max_health' in enemy_dict):

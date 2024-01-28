@@ -9,7 +9,7 @@ class CLBattle():
     def __init__(self, enemy):
         self.enemy = enemy
 
-    def run(self):
+    def run(self) -> None:
         print("\nStarting battle with {enemy_name}".format(enemy_name = self.enemy.name))
         
         while self.enemy.current_health > 0:
@@ -27,7 +27,7 @@ class CLBattle():
         print("\n")
         return (damage_per_roll, attack_speed, attack_type)
     
-    def __execute_turn(self, damage_per_roll, attack_speed, attack_type):
+    def __execute_turn(self, damage_per_roll, attack_speed, attack_type) -> None:
         attacks_left = attack_speed
         while attacks_left > 0:
             roll = Roll.random_roll()
@@ -40,7 +40,7 @@ class CLBattle():
             input("Press 'Enter' to continue...")
             print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
         
-    def __get_attack_type(self):
+    def __get_attack_type(self) -> str:
         attack_type = input("Please enter your attack style: ")
         while attack_type not in attack_styles:
             attack_type = input("Please enter your attack style: ")
@@ -48,7 +48,7 @@ class CLBattle():
         return attack_type
     
     # Todo: Move to Turn/Attack classes        
-    def execute_roll(self, damage_per_roll, attack_type, roll):
+    def execute_roll(self, damage_per_roll, attack_type, roll) -> int:
         damage_dealt = self.__get_damage_from_roll(roll, damage_per_roll)
         if attack_type in self.enemy.weaknesses:
             damage_dealt += 10
@@ -58,7 +58,7 @@ class CLBattle():
             self.enemy.current_health -= damage_dealt
             return damage_dealt
 
-    def __get_damage_from_roll(self, roll, damage):
+    def __get_damage_from_roll(self, roll, damage) -> int:
         if (roll == 1):
             return 0
         elif (roll == 2):
