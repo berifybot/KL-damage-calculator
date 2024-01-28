@@ -1,7 +1,8 @@
 import random
+import math
 from roll import Roll
 
-attack_styles = ["dark", "light", "fire", "water", "electric", "earth", "range", "melee"]
+attack_styles = ["magic", "range", "melee"]
 
 class CLBattle():
 
@@ -29,11 +30,11 @@ class CLBattle():
     def __execute_turn(self, damage_per_roll, attack_speed, attack_type):
         attacks_left = attack_speed
         while attacks_left > 0:
-            roll = Roll(damage_per_roll, self.enemy, attack_type)
-            roll.execute_roll()
+            roll = Roll.random_roll()
+            damage_dealt = self.execute_roll(damage_per_roll, attack_type, roll)
             print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-            print("You rolled a {roll}.".format(roll = roll.roll))
-            print("You dealt {damage} damage to the enemy!".format(damage = roll.damage_dealt))
+            print("You rolled a {roll}.".format(roll = roll))
+            print("You dealt {damage} damage to the enemy!".format(damage = damage_dealt))
             print("The {enemy} now has {health} HP remaining".format(enemy = self.enemy.name, health = self.enemy.current_health))
             attacks_left -= 1
             input("Press 'Enter' to continue...")
@@ -45,4 +46,31 @@ class CLBattle():
             attack_type = input("Please enter your attack style: ")
 
         return attack_type
+    
+    # Todo: Move to Turn/Attack classes        
+    def execute_roll(self, damage_per_roll, attack_type, roll):
+        damage_dealt = self.__get_damage_from_roll(roll, damage_per_roll)
+        if attack_type in self.enemy.weaknesses:
+            damage_dealt += 10
+            self.enemy.current_health -= damage_dealt
+            return damage_dealt
+        else:
+            self.enemy.current_health -= damage_dealt
+            return damage_dealt
+
+    def __get_damage_from_roll(self, roll, damage):
+        if (roll == 1):
+            return 0
+        elif (roll == 2):
+            return 0
+        elif (roll == 3):
+            return math.floor(damage / 2)
+        elif (roll == 4):
+            return damage
+        elif (roll == 5):
+            return damage + 3
+        elif (roll == 6):
+            return damage + 5
+        else:
+            raise Exception("Invalid roll value")
 
