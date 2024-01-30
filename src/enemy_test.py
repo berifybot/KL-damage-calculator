@@ -10,12 +10,11 @@ dragon_dict = {
     }
 
 class TestEnemy(unittest.TestCase):
-    def test_default_creation(self):
-        enemy = Enemy()
-        self.assertIsNotNone(enemy)
 
-    def test_dict_argument_creation(self):
-        enemy = Enemy(dragon_dict)
+    def test_default_creation(self):
+        enemy = Enemy(dragon_dict['name'], dragon_dict['max_health'],
+                      dragon_dict['base_damage'], dragon_dict['damage_type'],
+                      dragon_dict['weaknesses'])
         self.assertIsNotNone(enemy)
         self.assertEqual(enemy.name, dragon_dict['name'])
         self.assertEqual(enemy.max_health, dragon_dict['max_health'])
@@ -25,8 +24,7 @@ class TestEnemy(unittest.TestCase):
         self.assertEqual(enemy.weaknesses, dragon_dict['weaknesses'])
 
     def test_load_creation(self):
-        enemy = Enemy()
-        enemy.load(dragon_dict)
+        enemy = Enemy.load(dragon_dict)
         self.assertEqual(enemy.name, dragon_dict['name'])
         self.assertEqual(enemy.max_health, dragon_dict['max_health'])
         self.assertEqual(enemy.current_health, dragon_dict['max_health'])

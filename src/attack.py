@@ -1,20 +1,5 @@
 from enum import Enum
 
-class AttackType(Enum):
-    Range = 1
-    Mage = 2
-    Melee = 3
-
-class Element(Enum):
-    Fire = 1
-    Water = 2
-    Lightning = 3
-    Earth = 4
-    Light = 5
-    Dark = 6
-    Ice = 7
-    Wind = 8
-
 class Status(Enum):
     Burn = 1
     Freeze = 2

@@ -1,4 +1,6 @@
-class Enemy():
+from entity import Entity
+
+class Enemy(Entity):
     name = ""
     max_health = 0
     current_health = 0
@@ -6,18 +8,18 @@ class Enemy():
     damage_type = ""
     weaknesses = []
 
-    def __init__(self, enemy_dict = {}):
-        self.load(enemy_dict)
-
+    @classmethod
     def load(self, enemy_dict: dict) -> None:
-        if ('name' in enemy_dict):
-            self.name = enemy_dict['name']
-        if ('max_health' in enemy_dict):
-            self.max_health = enemy_dict['max_health']
-            self.current_health = self.max_health
-        if ('base_damage' in enemy_dict):
-            self.base_damage = enemy_dict['base_damage']
-        if ('damage_type' in enemy_dict):
-            self.damage_type = enemy_dict['damage_type']
-        if ('weaknesses' in enemy_dict):
-            self.weaknesses = enemy_dict['weaknesses']
+        if ('name' not in enemy_dict):
+            raise Exception("Invalid enemy, missing 'name'")
+        if ('max_health' not in enemy_dict):
+            raise Exception("Invalid enemy, missing 'max_health'")
+        if ('base_damage' not in enemy_dict):
+            raise Exception("Invalid enemy, missing 'base_damage'")
+        if ('damage_type' not in enemy_dict):
+            raise Exception("Invalid enemy, missing 'damage_type'")
+        if ('weaknesses' not in enemy_dict):
+            raise Exception("Invalid enemy, missing 'weaknesses'")
+        return Enemy(enemy_dict['name'], enemy_dict['max_health'],
+                     enemy_dict['base_damage'], enemy_dict['damage_type'],
+                     enemy_dict['weaknesses'])
