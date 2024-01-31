@@ -8,6 +8,12 @@ class Turn():
         self.enemy = enemy
     
     def execute_turn(self):
+        # get base damage
+        # get attack speed
+        # get attack type
+        # get element for attack?
+        # create player
+        # player attacks enemy x times (x = attack speed)
         attacks_remaining = self.host.get_attack_speed()
         damage_per_roll = self.host.get_damage_per_roll()
         attack_type = self.host.get_attack_type()

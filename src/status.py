@@ -36,7 +36,3 @@ class Status(Enum):
     SoulSiphoned = 34
     Boombursted = 35
     Intimidate = 36
-
-class Attack():
-    def __init__(self, damage, attack_type, element, status):
-        pass

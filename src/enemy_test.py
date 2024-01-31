@@ -4,10 +4,14 @@ from enemy import Enemy
 dragon_dict = {
         "name": "Dragon",
         "max_health": 500,
-        "base_damage": 25,
-        "damage_type": "melee",
-        "weaknesses": ["water", "melee"]
-    }
+        "damage_source": {
+            "name": "dragon_breath",
+            "base_damage": 25,
+            "element": "Fire",
+            "damage_type": "Melee",
+        },
+        "weaknesses": ["Water", "Melee"]
+}
 
 class TestEnemy(unittest.TestCase):
 
