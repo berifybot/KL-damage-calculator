@@ -1,5 +1,5 @@
 from cl_battle import CLBattle
-from enemy import Enemy
+from entity import Enemy
 from host import Host
 
 WAITING_COMMAND = "w"

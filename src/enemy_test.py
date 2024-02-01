@@ -1,5 +1,5 @@
 import unittest
-from enemy import Enemy
+from entity import Enemy
 
 dragon_dict = {
         "name": "Dragon",
