@@ -1,5 +1,3 @@
-import random
-import math
 from battle_host import BattleHost
 from turn import Turn
 
@@ -13,11 +11,11 @@ class CLBattle(BattleHost):
         
         while self.enemy.current_health > 0:
             print("The {enemy} has {health_value} HP!".format(enemy = self.enemy.name, health_value = self.enemy.current_health))
-            self.__execute_turn()
+            self.__execute_turn__()
         
         print("You have defeated the {enemy}".format(enemy = self.enemy.name))
 
-    def __execute_turn(self) -> None:
+    def __execute_turn__(self) -> None:
         Turn(self, self.enemy).execute_turn()
 
     def get_roll(self) -> int:

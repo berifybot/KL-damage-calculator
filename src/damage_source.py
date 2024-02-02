@@ -38,10 +38,22 @@ class Weapon(DamageSource):
     def get_attack_type(self) -> AttackType:
         return self.attack_type
     
+    @classmethod
+    def from_dict(cls, dict: dict):
+        if ('name' not in dict):
+            raise Exception("Invalid Weapon, missing 'name'")
+        if ('base_damage' not in dict):
+            raise Exception("Invalid Weapon, missing 'base_damage'")
+        if ('element' not in dict):
+            raise Exception("Invalid Weapon, missing 'element'")
+        if ('damage_type' not in dict):
+            raise Exception("Invalid Weapon, missing 'damage_type")
+        return Weapon(dict['name'],
+                      dict['base_damage'],
+                      getattr(Element, dict['element']),
+                      getattr(AttackType, dict['damage_type']))
+        
+    
 class Ability(DamageSource):
     # TODO
     pass
-    
-weapon = Weapon("test", 5, Element.Dark, AttackType.Melee)
-
-print(weapon.get_attack_type(), weapon.get_base_damage(), weapon.get_name(), weapon.get_element())

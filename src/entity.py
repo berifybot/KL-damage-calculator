@@ -31,30 +31,30 @@ class Player():
 
     def get_attack_speed(self) -> int:
         return self.attack_speed
-    
+
+NAME = "name"
+MAX_HEALTH = "max_health"
+DAMAGE_SOURCE = "damage_source"
+WEAKNESSES = "weaknesses"
+
 class Enemy(Entity):
 
     @classmethod
-    def load(self, enemy_dict: dict) -> None:
-        # TODO: Clean this mess up
-        if ('name' not in enemy_dict):
-            raise Exception("Invalid enemy, missing 'name'")
-        if ('max_health' not in enemy_dict):
-            raise Exception("Invalid enemy, missing 'max_health'")
-        if ('damage_source' not in enemy_dict):
-            raise Exception("Invalid enemy, missing 'damage_sources'")
-        if ('name' not in enemy_dict['damage_source']):
-            raise Exception("Invalid enemy, missing 'name' in 'damage_source'")
-        if('base_damage' not in enemy_dict['damage_source']):
-            raise Exception("Invalid enemy, missing 'base_damage' in 'damage_source'")
-        if('element' not in enemy_dict['damage_source']):
-            raise Exception("Invalid enemy, missing 'element' in 'damage_source'")
-        if('damage_type' not in enemy_dict['damage_source']):
-            raise Exception("Invalid enemy, missing 'damage_type' in 'damage_source'")
-        if ('weaknesses' not in enemy_dict):
-            raise Exception("Invalid enemy, missing 'weaknesses'")
-        weapon = Weapon(enemy_dict['damage_source']['name'], enemy_dict["damage_source"]['base_damage'], 
-                        getattr(Element, enemy_dict['damage_source']['element']), 
-                        getattr(AttackType, enemy_dict['damage_source']['damage_type']))
+    def __invalid_enemy_exception__(cls, prop) -> str:
+        raise Exception("Invalid enemy, missing '{prop}'".format(prop = prop))
+
+    @classmethod
+    def load(cls, enemy_dict: dict):
+        # TODO: Try to implement a schema validator? This seems messy still
+        if (NAME not in enemy_dict):
+            cls.__invalid_enemy_exception__(NAME)
+        if (MAX_HEALTH not in enemy_dict):
+            cls.__invalid_enemy_exception__(MAX_HEALTH)
+        if (DAMAGE_SOURCE not in enemy_dict):
+            cls.__invalid_enemy_exception__(DAMAGE_SOURCE)
+        if (WEAKNESSES not in enemy_dict):
+            cls.__invalid_enemy_exception__(WEAKNESSES)
+        
+        weapon = Weapon.from_dict(enemy_dict["damage_source"])
         return Enemy(enemy_dict['name'], enemy_dict['max_health'], weapon,
                      enemy_dict['weaknesses'])
