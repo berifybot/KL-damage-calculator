@@ -24,7 +24,7 @@ class Entity():
     def get_weaknesses(self) -> List[Element]:
         return self.weaknesses
     
-class Player():
+class Player(Entity):
     def __init__(self, name: str, max_health: int, weapon: Weapon, attack_speed: int, weaknesses: List[Element] = []):
         super().__init__(name, max_health, weapon, weaknesses)
         self.attack_speed = attack_speed
@@ -57,4 +57,4 @@ class Enemy(Entity):
         
         weapon = Weapon.from_dict(enemy_dict["damage_source"])
         return Enemy(enemy_dict['name'], enemy_dict['max_health'], weapon,
-                     enemy_dict['weaknesses'])
+                     enemy_dict['weaknesses']) 
