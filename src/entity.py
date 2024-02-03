@@ -44,7 +44,7 @@ class Enemy(Entity):
         raise Exception("Invalid enemy, missing '{prop}'".format(prop = prop))
 
     @classmethod
-    def load(cls, enemy_dict: dict):
+    def from_dict(cls, enemy_dict: dict):
         # TODO: Try to implement a schema validator? This seems messy still
         if (NAME not in enemy_dict):
             cls.__invalid_enemy_exception__(NAME)

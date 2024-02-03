@@ -44,7 +44,7 @@ class CLRunner(Host):
             print("{command} is not a valid command, please try again".format(command = command))
 
     def __find_enemy(self, enemy_name) -> Enemy:
-        return Enemy.load(temp_dragon_dict)
+        return Enemy.from_dict(temp_dragon_dict)
 
 if __name__ == "__main__":
     CLRunner().run()
