@@ -33,7 +33,7 @@ class TestEnemy(unittest.TestCase):
         self.assertEqual(enemy.current_health, dragon_dict['max_health'])
         self.assertEqual(enemy.weaknesses, dragon_dict['weaknesses'])
 
-    def test_enemy_load_creation(self):
+    def test_enemy_from_dict_creation(self):
         enemy = Enemy.from_dict(dragon_dict)
         self.assertEqual(enemy.name, dragon_dict['name'])
         self.assertEqual(enemy.max_health, dragon_dict['max_health'])
