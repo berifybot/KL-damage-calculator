@@ -29,6 +29,11 @@ class DamageSource():
     
     def get_element(self) -> Element:
         return self.element
+    
+NAME = "name"
+BASE_DAMAGE = "base_damage"
+ELEMENT = "element"
+DAMAGE_TYPE = "damage_type"
 
 class Weapon(DamageSource):
     def __init__(self, name: str, base_damage: int, element: Element, attack_type: AttackType):
@@ -39,15 +44,19 @@ class Weapon(DamageSource):
         return self.attack_type
     
     @classmethod
+    def __invalid_weapon_exception__(cls, prop) -> str:
+        raise Exception("Invalid Weapon, missing '{prop}'".format(prop = prop))
+    
+    @classmethod
     def from_dict(cls, dict: dict):
-        if ('name' not in dict):
-            raise Exception("Invalid Weapon, missing 'name'")
-        if ('base_damage' not in dict):
-            raise Exception("Invalid Weapon, missing 'base_damage'")
-        if ('element' not in dict):
-            raise Exception("Invalid Weapon, missing 'element'")
-        if ('damage_type' not in dict):
-            raise Exception("Invalid Weapon, missing 'damage_type")
+        if (NAME not in dict):
+            cls.__invalid_weapon_exception__(NAME)
+        if (BASE_DAMAGE not in dict):
+            cls.__invalid_weapon_exception__(BASE_DAMAGE)
+        if (ELEMENT not in dict):
+            cls.__invalid_weapon_exception__(ELEMENT)
+        if (DAMAGE_TYPE not in dict):
+            cls.__invalid_weapon_exception__(DAMAGE_TYPE)
         return Weapon(dict['name'],
                       dict['base_damage'],
                       getattr(Element, dict['element']),
@@ -57,3 +66,13 @@ class Weapon(DamageSource):
 class Ability(DamageSource):
     # TODO
     pass
+
+test_weapon = {
+    "name": "test_weapon",
+    "base_damage": 25,
+    "element": "Fire",
+    "damage_type": "Melee"
+}
+
+weapon = Weapon.from_dict(test_weapon)
+print(weapon.name, weapon.base_damage, weapon.element, weapon.attack_type)
