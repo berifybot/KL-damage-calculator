@@ -1,4 +1,6 @@
 from typing import List
+from roll import Roll
+import math
 from damage_source import Weapon, Element, AttackType
 
 class Entity():
@@ -23,6 +25,37 @@ class Entity():
 
     def get_weaknesses(self) -> List[Element]:
         return self.weaknesses
+    
+    def attack(self, target, host) -> None:
+        roll = Roll().random_roll()
+        damage_dealt = self.execute_roll(roll, target)
+        host.report_roll_stats(2, damage_dealt, target)
+
+    def execute_roll(self, roll, target) -> int:
+        damage_dealt = self.__get_damage_from_roll(roll)
+        if self.weapon.attack_type in target.weaknesses:
+            damage_dealt += 10
+            target.current_health -= damage_dealt
+            return damage_dealt
+        else:
+            target.current_health -= damage_dealt
+            return damage_dealt
+
+    def __get_damage_from_roll(self, roll) -> int:
+        if (roll == 1):
+            return 0
+        elif (roll == 2):
+            return 0
+        elif (roll == 3):
+            return math.floor(self.weapon.base_damage / 2)
+        elif (roll == 4):
+            return self.weapon.base_damage
+        elif (roll == 5):
+            return self.weapon.base_damage + 3
+        elif (roll == 6):
+            return self.weapon.base_damage + 5
+        else:
+            raise Exception("Invalid roll value")
     
 class Player(Entity):
     def __init__(self, name: str, max_health: int, weapon: Weapon, attack_speed: int, weaknesses: List[Element] = []):

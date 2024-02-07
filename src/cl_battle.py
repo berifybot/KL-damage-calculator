@@ -28,7 +28,7 @@ class CLBattle(BattleHost):
         return int(input("Enter damage per roll: ") or 0)
 
     def get_attack_type(self) -> str:
-        attack_styles = ["magic", "range", "melee"]
+        attack_styles = ["Magic", "Range", "Melee"]
         attack_type = input("Please enter your attack style: ")
         while attack_type not in attack_styles:
             attack_type = input("Please enter your attack style: ")
