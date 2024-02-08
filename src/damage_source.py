@@ -66,13 +66,3 @@ class Weapon(DamageSource):
 class Ability(DamageSource):
     # TODO
     pass
-
-test_weapon = {
-    "name": "test_weapon",
-    "base_damage": 25,
-    "element": "Fire",
-    "damage_type": "Melee"
-}
-
-weapon = Weapon.from_dict(test_weapon)
-print(weapon.name, weapon.base_damage, weapon.element, weapon.attack_type)
