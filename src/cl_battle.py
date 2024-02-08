@@ -1,4 +1,5 @@
 from battle_host import BattleHost
+from roll import Roll
 from turn import Turn
 
 class CLBattle(BattleHost):
@@ -17,9 +18,6 @@ class CLBattle(BattleHost):
 
     def __execute_turn__(self) -> None:
         Turn(self, self.enemy).execute_turn()
-
-    def get_roll(self) -> int:
-        return int(input("Enter roll value: "))
     
     def get_attack_speed(self) -> int:
         return int(input("Enter attack speed: ") or 0)
@@ -34,6 +32,9 @@ class CLBattle(BattleHost):
             attack_type = input("Please enter your attack style: ")
 
         return attack_type
+    
+    def roll(self) -> int:
+        return Roll.random_roll()
     
     def report_roll_stats(self, roll_value, damage_dealt, enemy):
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")

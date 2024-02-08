@@ -3,10 +3,6 @@ from abc import ABC, abstractmethod
 class BattleHost(ABC):
 
     @abstractmethod
-    def get_roll(self) -> int:
-        pass
-
-    @abstractmethod
     def get_attack_speed(self) -> int:
         pass
 
@@ -16,6 +12,10 @@ class BattleHost(ABC):
 
     @abstractmethod
     def get_attack_type(self) -> str:
+        pass
+
+    @abstractmethod
+    def roll(self) -> int:
         pass
 
     @abstractmethod

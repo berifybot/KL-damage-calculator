@@ -7,9 +7,4 @@ class Roll():
     @classmethod
     def random_roll(cls) -> int:
         return die_roller()
-
-
-    @classmethod
-    def defined_roll(cls, host) -> int:
-        return host.get_roll()
     

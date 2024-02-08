@@ -1,4 +1,5 @@
 from entity import Player
+from attack import Attack
 from damage_source import Weapon, AttackType
 
 class Turn():
@@ -20,6 +21,6 @@ class Turn():
         weapon = Weapon("DefaultWeapon", damage_per_roll, None, getattr(AttackType, attack_type))
         player = Player("DefaultPlayer", 500, weapon, attacks_remaining)
         while attacks_remaining > 0:
-            player.attack(self.enemy, self.host)
+            Attack(self.host, player, self.enemy).attack()
             attacks_remaining -= 1
         return
