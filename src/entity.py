@@ -24,6 +24,24 @@ class Entity():
     def get_weaknesses(self) -> List[Element]:
         return self.weaknesses
     
+    def apply_status_from_element(self, element: Element) -> None:
+        if (element == Element.Dark):
+            print("Applied Cursed")
+        if (element == Element.Earth):
+            print("Applied Rooted")
+        if (element == Element.Fire):
+            print("Applied Burn")
+        if (element == Element.Ice):
+            print("Applied Freeze")
+        if (element == Element.Light):
+            print("Applied Blessed")
+        if (element == Element.Water):
+            print("Applied Slip")
+        if (element == Element.Wind):
+            print("Applied Airborn")
+        if (element == Element.Lightning):
+            print("Applied Paralyze")
+    
 class Player(Entity):
     def __init__(self, name: str, max_health: int, weapon: Weapon, attack_speed: int, weaknesses: List[Element] = []):
         super().__init__(name, max_health, weapon, weaknesses)

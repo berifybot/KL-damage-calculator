@@ -34,7 +34,8 @@ class CLBattle(BattleHost):
         return attack_type
     
     def roll(self) -> int:
-        return Roll.random_roll()
+        return int(input("Enter Roll Value: "))
+        # return Roll.random_roll()
     
     def report_roll_stats(self, roll_value, damage_dealt, enemy):
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
