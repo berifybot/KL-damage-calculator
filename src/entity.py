@@ -1,5 +1,5 @@
 from typing import List
-from damage_source import Weapon, Element, AttackType
+from damage_source import Weapon, Element
 
 class Entity():
     def __init__(self, name: str, max_health: int, weapon: Weapon, weaknesses: List[Element] = []):
@@ -24,6 +24,7 @@ class Entity():
     def get_weaknesses(self) -> List[Element]:
         return self.weaknesses
     
+    # Remove entirely by using polymorphism from attack.py call
     def apply_status_from_element(self, element: Element) -> None:
         if (element == Element.Dark):
             print("Applied Cursed")

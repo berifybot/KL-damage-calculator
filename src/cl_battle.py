@@ -1,5 +1,6 @@
 from battle_host import BattleHost
 from roll import Roll
+from damage_source import AttackType
 from turn import Turn
 
 class CLBattle(BattleHost):
@@ -26,9 +27,8 @@ class CLBattle(BattleHost):
         return int(input("Enter damage per roll: ") or 0)
 
     def get_attack_type(self) -> str:
-        attack_styles = ["Magic", "Range", "Melee"]
         attack_type = input("Please enter your attack style: ")
-        while attack_type not in attack_styles:
+        while not AttackType.is_type_valid(attack_type):
             attack_type = input("Please enter your attack style: ")
 
         return attack_type

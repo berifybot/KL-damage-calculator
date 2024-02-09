@@ -1,9 +1,26 @@
 from enum import Enum
 
-class AttackType(Enum):
-    Range = 1
-    Mage = 2
-    Melee = 3
+class AttackType():
+
+    UNKNOWN = "unknown"
+    MELEE = "melee"
+    RANGE = "range"
+    MAGIC = "magic"
+    ABILITY = "ability"
+    types = [MELEE, RANGE, MAGIC, ABILITY]
+
+    def __init__(self, type: str) -> None:
+        if (type.lower() not in self.types):
+            self.type = self.UNKNOWN
+        self.type = type.lower()
+
+    def get_type(self) -> str:
+        return self.type
+
+    @classmethod
+    def is_type_valid(cls, type: str) -> bool:
+        return type.lower() in cls.types
+
 
 class Element(Enum):
     Fire = 1
@@ -16,6 +33,7 @@ class Element(Enum):
     Wind = 8
 
 class DamageSource():
+
     def __init__(self, name: str, base_damage: int, element: Element):
         self.name = name
         self.base_damage = base_damage
@@ -36,9 +54,10 @@ ELEMENT = "element"
 DAMAGE_TYPE = "damage_type"
 
 class Weapon(DamageSource):
-    def __init__(self, name: str, base_damage: int, element: Element, attack_type: AttackType):
+
+    def __init__(self, name: str, base_damage: int, element: Element, attack_type: str):
         super().__init__(name, base_damage, element)
-        self.attack_type = attack_type
+        self.attack_type = AttackType(attack_type)
     
     def get_attack_type(self) -> AttackType:
         return self.attack_type
@@ -60,7 +79,7 @@ class Weapon(DamageSource):
         return Weapon(dict['name'],
                       dict['base_damage'],
                       getattr(Element, dict['element']),
-                      getattr(AttackType, dict['damage_type']))
+                      dict['damage_type'])
         
     
 class Ability(DamageSource):
