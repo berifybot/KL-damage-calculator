@@ -2,6 +2,9 @@ from typing import List
 from damage_source import Weapon, Element
 
 class Entity():
+
+    statuses: List[str] = []
+
     def __init__(self, name: str, max_health: int, weapon: Weapon, weaknesses: List[Element] = []):
         self.name = name
         self.max_health = max_health
@@ -24,24 +27,8 @@ class Entity():
     def get_weaknesses(self) -> List[Element]:
         return self.weaknesses
     
-    # Remove entirely by using polymorphism from attack.py call
-    def apply_status_from_element(self, element: Element) -> None:
-        if (element == Element.Dark):
-            print("Applied Cursed")
-        if (element == Element.Earth):
-            print("Applied Rooted")
-        if (element == Element.Fire):
-            print("Applied Burn")
-        if (element == Element.Ice):
-            print("Applied Freeze")
-        if (element == Element.Light):
-            print("Applied Blessed")
-        if (element == Element.Water):
-            print("Applied Slip")
-        if (element == Element.Wind):
-            print("Applied Airborn")
-        if (element == Element.Lightning):
-            print("Applied Paralyze")
+    def add_status(self, status: str) -> None:
+        self.statuses.append(status)
     
 class Player(Entity):
     def __init__(self, name: str, max_health: int, weapon: Weapon, attack_speed: int, weaknesses: List[Element] = []):

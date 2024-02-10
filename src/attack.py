@@ -1,9 +1,10 @@
 import math
+from entity import Entity
 from battle_host import BattleHost
 
 class Attack():
 
-    def __init__(self, host: BattleHost, attacker, target):
+    def __init__(self, host: BattleHost, attacker: Entity, target: Entity):
         self.host = host
         self.attacker = attacker
         self.target = target
@@ -45,7 +46,7 @@ class Attack():
     def __handle_status_roll__(self, base_roll):
         status_roll = self.host.roll()
         if (self.__did_status_apply__(base_roll, status_roll)):
-            self.target.apply_status_from_element(self.attacker.weapon.element)
+            self.attacker.weapon.element.apply_status(self.attacker, self.target)
         
     def __did_status_apply__(self, base_roll, status_roll) -> bool:
         if (base_roll == 5):

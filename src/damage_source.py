@@ -70,7 +70,7 @@ class WaterElement(Element):
         super().__init__(self.WATER)
 
     def apply_status(self, attacker, target) -> None:
-        pass
+        target.add_status("Slip")
 
 class FireElement(Element):
 
@@ -78,7 +78,7 @@ class FireElement(Element):
         super().__init__(self.FIRE)
 
     def apply_status(self, attacker, target) -> None:
-        pass
+        target.add_status("Burn")
 
 class LightningElement(Element):
 
@@ -86,7 +86,7 @@ class LightningElement(Element):
         super().__init__(self.LIGHTNING)
 
     def apply_status(self, attacker, target) -> None:
-        pass
+        target.add_status("Paralyze")
 
 class EarthElement(Element):
 
@@ -94,7 +94,7 @@ class EarthElement(Element):
         super().__init__(self.EARTH)
 
     def apply_status(self, attacker, target) -> None:
-        pass
+        target.add_status("Rooted")
 
 class LightElement(Element):
 
@@ -102,7 +102,7 @@ class LightElement(Element):
         super().__init__(self.LIGHT)
 
     def apply_status(self, attacker, target) -> None:
-        pass
+        attacker.add_status("Blessed")
 
 class DarkElement(Element):
 
@@ -110,7 +110,7 @@ class DarkElement(Element):
         super().__init__(self.DARK)
 
     def apply_status(self, attacker, target) -> None:
-        pass
+        target.add_status("Cursed")
 
 class IceElement(Element):
 
@@ -118,7 +118,7 @@ class IceElement(Element):
         super().__init__(self.ICE)
 
     def apply_status(self, attacker, target) -> None:
-        pass
+        target.add_status("Freeze")
 
 class WindElement(Element):
 
@@ -126,7 +126,7 @@ class WindElement(Element):
         super().__init__(self.WIND)
 
     def apply_status(self, attacker, target) -> None:
-        pass
+        target.add_status("Airborn")
 
 
 class DamageSource():
