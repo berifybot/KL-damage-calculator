@@ -1,5 +1,6 @@
 from typing import List
-from damage_source import Weapon, Element
+from damage_source import Weapon
+from element import Element
 
 class Entity():
 

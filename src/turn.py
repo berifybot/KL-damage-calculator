@@ -1,6 +1,7 @@
 from entity import Player
 from attack import Attack
-from damage_source import Weapon, Element
+from damage_source import Weapon
+from element import Element
 
 class Turn():
     

@@ -1,4 +1,4 @@
-from damage_source import Weapon, Element, AttackType
+from damage_source import Weapon, AttackType
 import unittest
 
 test_weapon = {
