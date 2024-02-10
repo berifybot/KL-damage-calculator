@@ -19,7 +19,7 @@ class TestDamageSource(unittest.TestCase):
         self.assertIsNotNone(weapon)
         self.assertEqual(weapon.get_name(), test_weapon['name'])
         self.assertEqual(weapon.get_base_damage(), test_weapon['base_damage'])
-        self.assertEqual(weapon.get_element(), test_weapon['element'])
+        self.assertEqual(weapon.get_element().get_type(), test_weapon['element'])
         self.assertEqual(weapon.get_attack_type().get_type(), test_weapon['damage_type'])
 
     def test_weapon_from_dict_creation(self):

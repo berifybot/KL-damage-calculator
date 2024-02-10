@@ -23,10 +23,10 @@ class AttackType():
 
 class DamageSource():
 
-    def __init__(self, name: str, base_damage: int, element: Element):
+    def __init__(self, name: str, base_damage: int, element: str):
         self.name = name
         self.base_damage = base_damage
-        self.element = element
+        self.element = Element.create(element)
 
     def get_name(self) -> str:
         return self.name
@@ -44,7 +44,7 @@ DAMAGE_TYPE = "damage_type"
 
 class Weapon(DamageSource):
 
-    def __init__(self, name: str, base_damage: int, element: Element, attack_type: str):
+    def __init__(self, name: str, base_damage: int, element: str, attack_type: str):
         super().__init__(name, base_damage, element)
         self.attack_type = AttackType(attack_type)
     
@@ -67,7 +67,7 @@ class Weapon(DamageSource):
             cls.__invalid_weapon_exception__(DAMAGE_TYPE)
         return Weapon(dict['name'],
                       dict['base_damage'],
-                      Element.create(dict['element']),
+                      dict['element'],
                       dict['damage_type'])
         
     

@@ -1,7 +1,6 @@
 from entity import Player
 from attack import Attack
 from damage_source import Weapon
-from element import Element
 
 class Turn():
     
@@ -19,7 +18,7 @@ class Turn():
         attacks_remaining = self.host.get_attack_speed()
         damage_per_roll = self.host.get_damage_per_roll()
         attack_type = self.host.get_attack_type()
-        weapon = Weapon("DefaultWeapon", damage_per_roll, Element.create("Dark"), attack_type)
+        weapon = Weapon("DefaultWeapon", damage_per_roll, "Dark", attack_type)
         player = Player("DefaultPlayer", 500, weapon, attacks_remaining)
         while attacks_remaining > 0:
             Attack(self.host, player, self.enemy).attack()
