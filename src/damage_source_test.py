@@ -4,7 +4,7 @@ import unittest
 test_weapon = {
     "name": "test_weapon",
     "base_damage": 25,
-    "element": "Fire",
+    "element": "fire",
     "damage_type": "melee"
 }
 
@@ -27,7 +27,7 @@ class TestDamageSource(unittest.TestCase):
         
         self.assertEqual(weapon.get_name(), test_weapon['name'])
         self.assertEqual(weapon.get_base_damage(), test_weapon['base_damage'])
-        self.assertEqual(weapon.get_element(), getattr(Element, test_weapon['element']))
+        self.assertEqual(weapon.get_element().get_type(), test_weapon['element'])
         self.assertEqual(weapon.get_attack_type().get_type(), test_weapon['damage_type'])
 
 class TestAttackType(unittest.TestCase):

@@ -1,5 +1,3 @@
-from enum import Enum
-
 class AttackType():
 
     UNKNOWN = "unknown"
@@ -22,15 +20,114 @@ class AttackType():
         return type.lower() in cls.types
 
 
-class Element(Enum):
-    Fire = 1
-    Water = 2
-    Lightning = 3
-    Earth = 4
-    Light = 5
-    Dark = 6
-    Ice = 7
-    Wind = 8
+class Element():
+
+    UNKNOWN = "unknown"
+    FIRE = "fire"
+    WATER = "water"
+    LIGHTNING = "lightning"
+    EARTH = "earth"
+    LIGHT = "light"
+    DARK = "dark"
+    ICE = "ice"
+    WIND = "wind"
+    types = [FIRE, WATER, LIGHTNING, EARTH, LIGHT, DARK, ICE, WIND]
+
+    def __init__(self, type):
+        self.type = type
+
+    def get_type(self) -> str:
+        return self.type
+
+    def apply_status(self, attacker, target) -> None:
+        pass
+
+    @classmethod
+    def create(cls, type: str) -> None:
+        match type.lower():
+            case cls.FIRE:
+                return FireElement()
+            case cls.WATER:
+                return WaterElement()
+            case cls.LIGHTNING:
+                return LightningElement()
+            case cls.EARTH:
+                return EarthElement()
+            case cls.LIGHT:
+                return LightElement()
+            case cls.DARK:
+                return DarkElement()
+            case cls.ICE:
+                return IceElement()
+            case cls.WIND:
+                return WindElement()
+            case _:
+                return None
+            
+class WaterElement(Element):
+
+    def __init__(self) -> None:
+        super().__init__(self.WATER)
+
+    def apply_status(self, attacker, target) -> None:
+        pass
+
+class FireElement(Element):
+
+    def __init__(self) -> None:
+        super().__init__(self.FIRE)
+
+    def apply_status(self, attacker, target) -> None:
+        pass
+
+class LightningElement(Element):
+
+    def __init__(self) -> None:
+        super().__init__(self.LIGHTNING)
+
+    def apply_status(self, attacker, target) -> None:
+        pass
+
+class EarthElement(Element):
+
+    def __init__(self) -> None:
+        super().__init__(self.EARTH)
+
+    def apply_status(self, attacker, target) -> None:
+        pass
+
+class LightElement(Element):
+
+    def __init__(self) -> None:
+        super().__init__(self.LIGHT)
+
+    def apply_status(self, attacker, target) -> None:
+        pass
+
+class DarkElement(Element):
+
+    def __init__(self) -> None:
+        super().__init__(self.DARK)
+
+    def apply_status(self, attacker, target) -> None:
+        pass
+
+class IceElement(Element):
+
+    def __init__(self) -> None:
+        super().__init__(self.ICE)
+
+    def apply_status(self, attacker, target) -> None:
+        pass
+
+class WindElement(Element):
+
+    def __init__(self) -> None:
+        super().__init__(self.WIND)
+
+    def apply_status(self, attacker, target) -> None:
+        pass
+
 
 class DamageSource():
 
@@ -78,7 +175,7 @@ class Weapon(DamageSource):
             cls.__invalid_weapon_exception__(DAMAGE_TYPE)
         return Weapon(dict['name'],
                       dict['base_damage'],
-                      getattr(Element, dict['element']),
+                      Element.create(dict['element']),
                       dict['damage_type'])
         
     
