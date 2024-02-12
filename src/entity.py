@@ -12,6 +12,7 @@ class Entity():
         self.current_health = max_health
         self.weapon = weapon
         self.weaknesses = weaknesses
+        self.increased_status_effect_chance = True
 
     def get_name(self) -> str:
         return self.name
@@ -27,6 +28,12 @@ class Entity():
 
     def get_weaknesses(self) -> List[Element]:
         return self.weaknesses
+    
+    def has_increased_status_effect_chance(self) -> bool:
+        return self.increased_status_effect_chance
+    
+    def set_increased_status_effect_chance(self, value: bool) -> None:
+        self.increased_status_effect_chance = value
     
     def add_status(self, status: str) -> None:
         self.statuses.append(status)
