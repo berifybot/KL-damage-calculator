@@ -52,22 +52,17 @@ class Attack():
         if (base_roll == 5):
             if (self.attacker.has_increased_status_effect_chance()):
                 if (status_roll == 5):
-                    print("INCREASED CRIT SUCCESS")
                     return True
             if (status_roll == 6):
-                print("REGULAR CRIT SUCCESS")
                 return True
             return False
         elif (base_roll == 6):
             if (self.attacker.has_increased_status_effect_chance()):
                 if (status_roll == 4):
-                    print("INCREASED CRIT SUCCESS")
                     return True
             if (status_roll == 5):
-                print("REGULAR CRIT SUCCESS")
                 return True
             if (status_roll == 6):
-                print("REGULAR CRIT SUCCESS")
                 return True
             return False
         return False
