@@ -37,6 +37,8 @@ class TestPlayerCreator():
     def create(cls, weapon: Weapon, name = "TestPlayer", max_health = 500, attack_speed = 1, weaknesses= []) -> Player:
         return Player(name, max_health, weapon, attack_speed, weaknesses)
     
+class TestWeaponCreator():
+
     @classmethod
     def create(cls, name = "TestWeapon", base_damage = 50, element = "Light", attack_type = "Melee"):
         return Weapon(name, base_damage, element, attack_type)

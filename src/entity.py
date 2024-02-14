@@ -12,7 +12,7 @@ class Entity():
         self.current_health = max_health
         self.weapon = weapon
         self.weaknesses = weaknesses
-        self.increased_status_effect_chance = True
+        self.increased_status_effect_chance = False
 
     def get_name(self) -> str:
         return self.name
