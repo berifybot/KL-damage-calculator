@@ -85,7 +85,7 @@ class TestAttack(unittest.TestCase):
 
         weapon2 = TestWeaponCreator.create(element = "Lightning")
         player2 = TestPlayerCreator().create(weapon2)
-        attack2 = Attack(host, player1, enemy)
+        attack2 = Attack(host, player2, enemy)
 
         applied2 = attack2.__did_status_apply__(5, 6)
         self.assertEqual(applied2, False)
