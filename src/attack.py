@@ -51,9 +51,9 @@ class Attack():
         
     def __did_status_apply__(self, base_roll, status_roll) -> bool:
         if (base_roll == 5):
-            if (self.attacker.weapon.element == Element.WIND):
+            if (self.attacker.weapon.element.get_type() == Element.WIND):
                 return False
-            if (self.attacker.weapon.element == Element.LIGHTNING):
+            if (self.attacker.weapon.element.get_type() == Element.LIGHTNING):
                 return False
             if (self.attacker.has_increased_status_effect_chance()):
                 if (status_roll == 5):
