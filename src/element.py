@@ -20,6 +20,9 @@ class Element():
     def apply_status(self, attacker, target) -> None:
         pass
 
+    def has_low_chance(self) -> bool:
+        pass
+
     @classmethod
     def create(cls, type: str) -> None:
         match type.lower():
@@ -50,6 +53,9 @@ class WaterElement(Element):
     def apply_status(self, attacker, target) -> None:
         target.add_status("Slip")
 
+    def has_low_chance(self) -> bool:
+        return False
+
 class FireElement(Element):
 
     def __init__(self) -> None:
@@ -58,6 +64,9 @@ class FireElement(Element):
     def apply_status(self, attacker, target) -> None:
         target.add_status("Burn")
 
+    def has_low_chance(self) -> bool:   
+        return False
+
 class LightningElement(Element):
 
     def __init__(self) -> None:
@@ -65,6 +74,10 @@ class LightningElement(Element):
 
     def apply_status(self, attacker, target) -> None:
         target.add_status("Paralyze")
+    
+    def has_low_chance(self) -> bool:
+        return True
+
 
 class EarthElement(Element):
 
@@ -74,6 +87,9 @@ class EarthElement(Element):
     def apply_status(self, attacker, target) -> None:
         target.add_status("Rooted")
 
+    def has_low_chance(self) -> bool:
+        return False
+
 class LightElement(Element):
 
     def __init__(self) -> None:
@@ -81,6 +97,9 @@ class LightElement(Element):
 
     def apply_status(self, attacker, target) -> None:
         attacker.add_status("Blessed")
+
+    def has_low_chance(self) -> bool:
+        return False
 
 class DarkElement(Element):
 
@@ -90,6 +109,9 @@ class DarkElement(Element):
     def apply_status(self, attacker, target) -> None:
         target.add_status("Cursed")
 
+    def has_low_chance(self) -> bool:
+        return False
+
 class IceElement(Element):
 
     def __init__(self) -> None:
@@ -97,6 +119,9 @@ class IceElement(Element):
 
     def apply_status(self, attacker, target) -> None:
         target.add_status("Freeze")
+    
+    def has_low_chance(self) -> bool:
+        return False
 
 class WindElement(Element):
 
@@ -105,3 +130,6 @@ class WindElement(Element):
 
     def apply_status(self, attacker, target) -> None:
         target.add_status("Airborn")
+
+    def has_low_chance(self) -> bool:
+        return True
