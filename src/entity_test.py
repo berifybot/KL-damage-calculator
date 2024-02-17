@@ -1,5 +1,8 @@
 import unittest
 from entity import Enemy, Player
+from element import Element
+from mock_objects import TestEnemyCreator
+
 
 dragon_dict = {
         "name": "Dragon",
@@ -20,6 +23,27 @@ test_weapon = {
     "damage_type": "Melee"
 }
 
+class TestEntity(unittest.TestCase):
+
+    def test_is_weak_to_non_weakness(self):
+        enemy = TestEnemyCreator.create(None, weaknesses=["Fire"])
+
+        element = Element.create("Water")
+
+        is_weak_to = enemy.is_weak_to_element(element)
+
+        self.assertEqual(is_weak_to, False)
+
+    def test_is_weak_to_weakness(self):
+        enemy = TestEnemyCreator.create(None, weaknesses=["Fire"])
+
+        element = Element.create("Fire")
+    
+        is_weak_to = enemy.is_weak_to_element(element)
+
+        self.assertEqual(is_weak_to, True)
+        
+
 class TestEnemy(unittest.TestCase):
 
     def test_enemy_default_creation(self):
@@ -39,6 +63,8 @@ class TestEnemy(unittest.TestCase):
         self.assertEqual(enemy.get_max_health(), dragon_dict['max_health'])
         self.assertEqual(enemy.get_current_health(), dragon_dict['max_health'])
         self.assertEqual(len(enemy.get_weaknesses()), 2)
+
+class TestPlayer(unittest.TestCase):
 
     def test_player_default_creation(self):
         player_name = "test_player"

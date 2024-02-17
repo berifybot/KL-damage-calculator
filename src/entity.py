@@ -41,6 +41,12 @@ class Entity():
     
     def set_increased_status_effect_chance(self, value: bool) -> None:
         self.increased_status_effect_chance = value
+
+    def is_weak_to_element(self, element: Element) -> bool:
+        for weakness in self.weaknesses:
+            if weakness.get_type() == element.get_type():
+                return True
+        return False
     
     def add_status(self, status: str) -> None:
         self.statuses.append(status)

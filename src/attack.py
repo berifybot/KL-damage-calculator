@@ -17,7 +17,7 @@ class Attack():
 
     def execute_roll(self, roll) -> int:
         damage_dealt = self.__get_damage_from_roll__(roll)
-        if self.attacker.weapon.attack_type in self.target.weaknesses:
+        if self.target.is_weak_to_element(self.attacker.weapon.get_element()):
             damage_dealt += 10
             self.target.current_health -= damage_dealt
             return damage_dealt

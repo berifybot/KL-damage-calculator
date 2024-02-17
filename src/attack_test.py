@@ -178,6 +178,31 @@ class TestAttack(unittest.TestCase):
         damage = attack.__get_damage_from_roll__(6)
         self.assertEqual(30, damage)
 
+    def test_non_weakness_attack(self):
+        base_damage = 25
+        host = TestBattleHost(2, 25, "Melee", lambda: 1 )
+        enemy = TestEnemyCreator().create(None, max_health=50, weaknesses=["Fire"])
+        weapon = TestWeaponCreator().create(base_damage=base_damage)
+        player = TestPlayerCreator.create(weapon)
+        attack = Attack(host, player, enemy)
+
+        attack.execute_roll(4)
+
+        self.assertEqual(enemy.current_health, 25)
+
+    def test_weakness_attack(self):
+        base_damage = 25
+        host = TestBattleHost(2, 25, "Melee", lambda: 1 )
+        enemy = TestEnemyCreator().create(None, max_health=50, weaknesses=["Fire"])
+        weapon = TestWeaponCreator().create(base_damage=base_damage, element="Fire")
+        player = TestPlayerCreator.create(weapon)
+        attack = Attack(host, player, enemy)
+
+        attack.execute_roll(4)
+        self.assertEqual(enemy.current_health, 15)
+
+
+
 
 if __name__ == '__main__':
     unittest.main()

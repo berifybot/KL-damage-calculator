@@ -15,7 +15,7 @@ temp_dragon_dict = {
             "element": "Fire",
             "damage_type": "Melee",
         },
-        "weaknesses": ["Water", "Melee"]
+        "weaknesses": ["Water"]
 }
 
 class CLRunner(Host):
