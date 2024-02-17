@@ -6,13 +6,20 @@ class Entity():
 
     statuses: List[str] = []
 
-    def __init__(self, name: str, max_health: int, weapon: Weapon, weaknesses: List[Element] = []):
+    def __init__(self, name: str, max_health: int, weapon: Weapon, weaknesses: List[str] = []):
         self.name = name
         self.max_health = max_health
         self.current_health = max_health
         self.weapon = weapon
-        self.weaknesses = weaknesses
+        self.weaknesses = self.__convert_weaknesses__(weaknesses)
         self.increased_status_effect_chance = False
+
+    def __convert_weaknesses__(self, weaknesses: List[str]) -> List[Element]:
+        converted_weaknesses: List[Element] = []
+        for weakness in weaknesses:
+            converted_weaknesses.append(Element.create(weakness))
+        return converted_weaknesses
+        
 
     def get_name(self) -> str:
         return self.name
@@ -39,7 +46,7 @@ class Entity():
         self.statuses.append(status)
     
 class Player(Entity):
-    def __init__(self, name: str, max_health: int, weapon: Weapon, attack_speed: int, weaknesses: List[Element] = []):
+    def __init__(self, name: str, max_health: int, weapon: Weapon, attack_speed: int, weaknesses: List[str] = []):
         super().__init__(name, max_health, weapon, weaknesses)
         self.attack_speed = attack_speed
 

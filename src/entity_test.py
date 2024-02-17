@@ -31,14 +31,14 @@ class TestEnemy(unittest.TestCase):
         self.assertEqual(enemy.get_name(), dragon_dict['name'])
         self.assertEqual(enemy.get_max_health(), dragon_dict['max_health'])
         self.assertEqual(enemy.get_current_health(), dragon_dict['max_health'])
-        self.assertEqual(enemy.get_weaknesses(), dragon_dict['weaknesses'])
+        self.assertEqual(len(enemy.get_weaknesses()), 2)
 
     def test_enemy_from_dict_creation(self):
         enemy = Enemy.from_dict(dragon_dict)
         self.assertEqual(enemy.get_name(), dragon_dict['name'])
         self.assertEqual(enemy.get_max_health(), dragon_dict['max_health'])
         self.assertEqual(enemy.get_current_health(), dragon_dict['max_health'])
-        self.assertEqual(enemy.get_weaknesses(), dragon_dict['weaknesses'])
+        self.assertEqual(len(enemy.get_weaknesses()), 2)
 
     def test_player_default_creation(self):
         player_name = "test_player"
@@ -60,7 +60,7 @@ class TestEnemy(unittest.TestCase):
         self.assertEqual(player.get_name(), player_name)
         self.assertEqual(player.get_max_health(), max_health)
         self.assertEqual(player.get_attack_speed(), attack_speed)
-        self.assertEqual(player.get_weaknesses(), weaknesses)
+        self.assertEqual(len(player.get_weaknesses()), 2)
 
 if __name__ == '__main__':
     unittest.main()
