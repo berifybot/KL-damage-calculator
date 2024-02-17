@@ -51,21 +51,27 @@ class Attack():
         
     def __did_status_apply__(self, base_roll, status_roll) -> bool:
         if (base_roll == 5):
-            if (self.attacker.weapon.element.has_low_chance()):
-                return False
-            if (self.attacker.has_increased_status_effect_chance()):
-                if (status_roll == 5):
-                    return True
-            if (status_roll == 6):
-                return True
-            return False
+            return self.__handle_base_roll_5__(status_roll)
         elif (base_roll == 6):
-            if (self.attacker.has_increased_status_effect_chance()):
-                if (status_roll == 4):
-                    return True
+            return self.__handle_base_roll_6__(status_roll)
+        return False
+    
+    def __handle_base_roll_5__(self, status_roll) -> bool:
+        if (self.attacker.weapon.element.has_low_chance()):
+            return False
+        if (self.attacker.has_increased_status_effect_chance()):
             if (status_roll == 5):
                 return True
-            if (status_roll == 6):
+        if (status_roll == 6):
+            return True
+        return False
+    
+    def __handle_base_roll_6__(self, status_roll) -> bool:
+        if (self.attacker.has_increased_status_effect_chance()):
+            if (status_roll == 4):
                 return True
-            return False
+        if (status_roll == 5):
+            return True
+        if (status_roll == 6):
+            return True
         return False
