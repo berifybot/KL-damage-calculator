@@ -37,6 +37,11 @@ class TestPlayerCreator():
     def create(cls, weapon: Weapon, name = "TestPlayer", max_health = 500, attack_speed = 1, weaknesses= []) -> Player:
         return Player(name, max_health, weapon, attack_speed, weaknesses)
     
+    @classmethod
+    def createDefaultPlayer(cls):
+        weapon = Weapon("Sword", 50, "fire", "melee")
+        return Player("Default", 500, weapon, 3)
+    
 class TestWeaponCreator():
 
     @classmethod

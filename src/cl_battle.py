@@ -2,14 +2,19 @@ from battle_host import BattleHost
 from roll import Roll
 from damage_source import AttackType
 from turn import Turn
+from typing import List
+from entity import Player, Enemy
 
 class CLBattle(BattleHost):
 
-    def __init__(self, enemy):
+    def __init__(self, enemy: Enemy, players: List[Player]):
         self.enemy = enemy
+        self.players = players
 
     def run(self) -> None:
         print("\nStarting battle with {enemy_name}".format(enemy_name = self.enemy.name))
+
+        self.current_player = self.select_player()
         
         while self.enemy.current_health > 0:
             print("The {enemy} has {health_value} HP!".format(enemy = self.enemy.name, health_value = self.enemy.current_health))
@@ -17,8 +22,23 @@ class CLBattle(BattleHost):
         
         print("You have defeated the {enemy}".format(enemy = self.enemy.name))
 
+    def select_player(self):
+        print("Active Players: ")
+        for player in self.players:
+            print("\t " + player.get_name())
+        selected_player = self.get_player(input("Select a player: "))
+        while selected_player is None:
+            selected_player = self.get_player(input("Select a player: "))
+        return selected_player
+        
+    def get_player(self, player_name: str):
+        for player in self.players:
+            if player.get_name() == player_name:
+                return player
+        return None
+
     def __execute_turn__(self) -> None:
-        Turn(self, self.enemy).execute_turn()
+        Turn(self, self.enemy, self.current_player).execute_turn()
     
     def get_attack_speed(self) -> int:
         return int(input("Enter attack speed: ") or 0)
