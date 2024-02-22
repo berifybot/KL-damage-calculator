@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from attack_stats import AttackStats
 
 class BattleHost(ABC):
 
@@ -19,5 +20,5 @@ class BattleHost(ABC):
         pass
 
     @abstractmethod
-    def report_roll_stats(self, roll_value, damage_dealt, enemy):
+    def report_roll_stats(self, attack_stats: AttackStats):
         pass

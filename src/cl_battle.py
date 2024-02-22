@@ -61,10 +61,10 @@ class CLBattle(BattleHost):
         # return int(input("Enter Roll Value: "))
         return Roll.random_roll()
     
-    def report_roll_stats(self, roll_value, damage_dealt, enemy):
+    def report_roll_stats(self, stats):
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-        print("You rolled a {roll}.".format(roll = roll_value))
-        print("You dealt {damage} damage to the enemy!".format(damage = damage_dealt))
-        print("The {enemy} now has {health} HP remaining".format(enemy = enemy.name, health = enemy.current_health))
+        print("You rolled a {roll}.".format(roll = stats.base_roll_value))
+        print("You dealt {damage} damage to the {target}".format(damage = stats.damage_dealt, target=stats.target.name))
+        print("The {enemy} now has {health} HP remaining".format(enemy = stats.target.name, health = stats.target.current_health))
         input("Press 'Enter' to continue...")
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")

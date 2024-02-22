@@ -1,7 +1,7 @@
 import math
 from entity import Entity
-from element import Element
 from battle_host import BattleHost
+from attack_stats import AttackStats
 
 class Attack():
 
@@ -10,10 +10,13 @@ class Attack():
         self.attacker = attacker
         self.target = target
 
-    def attack(self):
+    def attack(self) -> AttackStats:
+        self.attack_stats = AttackStats(self.attacker, self.target)
         roll = self.host.roll()
+        self.attack_stats.set_base_roll(roll)
         damage_dealt = self.execute_roll(roll)
-        self.host.report_roll_stats(roll, damage_dealt, self.target)
+        self.attack_stats.set_damage_dealt(damage_dealt)
+        self.host.report_roll_stats(self.attack_stats)
 
     def execute_roll(self, roll) -> int:
         damage_dealt = self.__get_damage_from_roll__(roll)
