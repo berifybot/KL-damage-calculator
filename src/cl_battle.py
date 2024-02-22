@@ -13,16 +13,20 @@ class CLBattle(BattleHost):
 
     def run(self) -> None:
         print("\nStarting battle with {enemy_name}".format(enemy_name = self.enemy.name))
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
         self.current_player = self.select_player()
         
         while self.enemy.current_health > 0:
-            print("The {enemy} has {health_value} HP!".format(enemy = self.enemy.name, health_value = self.enemy.current_health))
             self.__execute_turn__()
-        
+            print("Player {player} has finished their turn!".format(player=self.current_player.get_name()))
+            if (self.enemy.current_health > 0):
+                print("Who will be attacking next?")
+                self.current_player = self.select_player()
         print("You have defeated the {enemy}".format(enemy = self.enemy.name))
 
     def select_player(self):
+        print("Please select a player...")
         print("Active Players: ")
         for player in self.players:
             print("\t " + player.get_name())
