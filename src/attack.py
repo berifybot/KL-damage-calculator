@@ -2,6 +2,7 @@ import math
 from entity import Entity
 from battle_host import BattleHost
 from attack_stats import AttackStats
+from roll_stats import RollStats
 
 class Attack():
 
@@ -9,18 +10,21 @@ class Attack():
         self.host = host
         self.attacker = attacker
         self.target = target
+        self.roll_stats = RollStats()
+        self.attack_stats = AttackStats(attacker, target)
 
     def attack(self) -> AttackStats:
-        self.attack_stats = AttackStats(self.attacker, self.target)
         roll = self.host.roll()
-        self.attack_stats.set_base_roll(roll)
-        damage_dealt = self.execute_roll(roll)
+        self.roll_stats.set_base_roll(roll)
+        damage_dealt = self.execute_roll(roll) 
         self.attack_stats.set_damage_dealt(damage_dealt)
+        self.attack_stats.set_roll_stats(self.roll_stats)
         self.host.report_roll_stats(self.attack_stats)
 
     def execute_roll(self, roll) -> int:
         damage_dealt = self.__get_damage_from_roll__(roll)
         if self.target.is_weak_to_element(self.attacker.weapon.get_element()):
+            self.roll_stats.set_hit_weakness(True)
             damage_dealt += 10
             self.target.current_health -= damage_dealt
             return damage_dealt
@@ -49,14 +53,20 @@ class Attack():
         
     def __handle_status_roll__(self, base_roll):
         status_roll = self.host.roll()
+        self.roll_stats.set_critical_roll(status_roll)
         if (self.__did_status_apply__(base_roll, status_roll)):
-            self.attacker.weapon.element.apply_status(self.attacker, self.target)
+            element_stats = self.attacker.weapon.element.apply_status(self.attacker, self.target)
+            self.roll_stats.set_element_stats(element_stats)
         
     def __did_status_apply__(self, base_roll, status_roll) -> bool:
         if (base_roll == 5):
-            return self.__handle_base_roll_5__(status_roll)
+            did_apply = self.__handle_base_roll_5__(status_roll)
+            self.roll_stats.set_did_crit(did_apply)
+            return did_apply
         elif (base_roll == 6):
-            return self.__handle_base_roll_6__(status_roll)
+            did_apply = self.__handle_base_roll_6__(status_roll)
+            self.roll_stats.set_did_crit(did_apply)
+            return did_apply
         return False
     
     def __handle_base_roll_5__(self, status_roll) -> bool:

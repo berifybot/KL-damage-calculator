@@ -26,7 +26,7 @@ class DamageSource():
     def __init__(self, name: str, base_damage: int, element: str):
         self.name = name
         self.base_damage = base_damage
-        self.element = Element.create(element)
+        self.element: Element = Element.create(element)
 
     def get_name(self) -> str:
         return self.name

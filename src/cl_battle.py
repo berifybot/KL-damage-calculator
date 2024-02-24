@@ -4,6 +4,7 @@ from damage_source import AttackType
 from turn import Turn
 from typing import List
 from entity import Player, Enemy
+from attack_stats import AttackStats
 
 class CLBattle(BattleHost):
 
@@ -61,10 +62,17 @@ class CLBattle(BattleHost):
         # return int(input("Enter Roll Value: "))
         return Roll.random_roll()
     
-    def report_roll_stats(self, stats):
+    def report_roll_stats(self, stats: AttackStats):
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-        print("You rolled a {roll}.".format(roll = stats.base_roll_value))
+        print("You rolled a {roll}.".format(roll = stats.base_roll))
+        if stats.critical_roll > 0:
+            print("You rolled a {crit} for your crit roll.".format(crit = stats.critical_roll))
+        if stats.did_crit:
+            print("You successfully hit a critical on the {target}!".format(target = stats.target.get_name()))
+            print("You applied {status} to the {target}!".format(status = stats.status_applied, target = stats.target.get_name()))
+        if stats.hit_weakness:
+            print("You exploited the {target}'s weakness!".format(target = stats.target.get_name()))
         print("You dealt {damage} damage to the {target}".format(damage = stats.damage_dealt, target=stats.target.name))
         print("The {enemy} now has {health} HP remaining".format(enemy = stats.target.name, health = stats.target.current_health))
-        input("Press 'Enter' to continue...")
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+        input("Press 'Enter' to continue...")
