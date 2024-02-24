@@ -47,63 +47,139 @@ class Status():
 
     @classmethod
     def create(cls, type: str) -> None:
-        pass
+        match type.lower():
+            case cls.BURN:
+                return Burn()
+            case cls.FREEZE:
+                return Freeze()
+            case cls.PARALYZE:
+                return Paralize()
+            case cls.ROOTED:
+                return Rooted()
+            case cls.BLESSED:
+                return Blessed()
+            case cls.CURSED:
+                return Cursed()
+            case cls.BLEED:
+                return Bleed()
+            case cls.POISON:
+                return Poison()
+            case cls.CONCUSSED:
+                return Concussed()
+            case cls.BLINDED:
+                return Blinded()
+            case cls.HYSTERIA:
+                return Hysteria()
+            case cls.AGILE:
+                return Agile()
+            case cls.WARDED:
+                return Warded()
+            case cls.FORTIFIED:
+                return Fortified()
+            case cls.CHAINED:
+                return Chained()
+            case cls.VOLLEYED:
+                return Volleyed()
+            case cls.CRUSHED:
+                return Crushed()
+            case cls.SHIMMERED:
+                return Shimmered()
+            case cls.FORESIGHT:
+                return Foresight()
+            case cls.AMBUSH:
+                return Ambush()
+            case cls.SNEAK:
+                return Sneak()
+            case cls.RUIN:
+                return Ruin()
+            case cls.AIRBORNE:
+                return Airborne()
+            case cls.LUCKY:
+                return Lucky()
+            case cls.WISDOM:
+                return Wisdom()
+            case cls.CHARMED:
+                return Charmed()
+            case cls.WHIRLWIND:
+                return Whirlwind()
+            case cls.LIFESTEAL:
+                return Lifesteal()
+            case cls.OVERHEALTH:
+                return Overhealth()
+            case cls.DETACHED:
+                return Detached()
+            case cls.WITHERED:
+                return Withered()
+            case cls.SLIP:
+                return Slip()
+            case cls.SOULSIPHONED:
+                return Soulsiphoned()
+            case cls.BOOMBURSTED:
+                return Boombursted()
+            case cls.INTIMIDATE:
+                return Intimidate()
+            case _:
+                return None
+
+    @classmethod
+    def is_type_valid(cls, type: str) -> bool:
+        return type.lower() in cls.types
 
 class Burn(Status):
     def __init__(self) -> None:
-        super.__init__(self.BURN)
+        super().__init__(self.BURN)
 
 class Freeze(Status):
     def __init__(self) -> None:
-        super.__init__(self.FREEZE)
+        super().__init__(self.FREEZE)
 
 class Paralize(Status):
     def __init__(self) -> None:
-        super.__init__(self.PARALYZE)
+        super().__init__(self.PARALYZE)
 
 class Rooted(Status):
     def __init__(self) -> None:
-        super.__init__(self.ROOTED)
+        super().__init__(self.ROOTED)
 
 class Blessed(Status):
     def __init__(self) -> None:
-        super.__init__(self.BLESSED)
+        super().__init__(self.BLESSED)
 
 class Cursed(Status):
     def __init__(self) -> None:
-        super.__init__(self.CURSED)
+        super().__init__(self.CURSED)
 
 class Bleed(Status):
     def __init__(self) -> None:
-        super.__init__(self.BLEED)
+        super().__init__(self.BLEED)
 
 class Poison(Status):
     def __init__(self) -> None:
-        super.__init__(self.POISON)
+        super().__init__(self.POISON)
 
 class Concussed(Status):
     def __init__(self) -> None:
-        super.__init__(self.CONCUSSED)
+        super().__init__(self.CONCUSSED)
 
 class Blinded(Status):
     def __init__(self) -> None:
-        super.__init__(self.BLINDED)
+        super().__init__(self.BLINDED)
 
 class Hysteria(Status):
     def __init__(self) -> None:
-        super.__init__(self.HYSTERIA)
+        super().__init__(self.HYSTERIA)
 
 class Agile(Status):
     def __init__(self) -> None:
-        super.__init__(self.AGILE)
+        super().__init__(self.AGILE)
 
 class Warded(Status):
     def __init__(self) -> None:
-        super.__init__(self.WARDED)
+        super().__init__(self.WARDED)
 
 class Fortified(Status):
     def __init__(self) -> None:
-        super.__init__(self.FORTIFIED)
+        super().__init__(self.FORTIFIED)
 
 class Chained(Status):
     def __init__(self) -> None:
