@@ -3,6 +3,14 @@ from element import Element
 
 class TestElement(unittest.TestCase):
 
+    def test_invalid_element_type(self):
+        valid = Element.is_type_valid("invalid")
+        self.assertFalse(valid)
+
+    def test_valid_element_type(self):
+        valid = Element.is_type_valid("fire")
+        self.assertTrue(valid)
+
     def test_invalid_creation(self):
         invalid_element = Element.create("Invalid")
         self.assertEqual(invalid_element, None)

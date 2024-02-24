@@ -14,6 +14,8 @@ class Element():
     types = [FIRE, WATER, LIGHTNING, EARTH, LIGHT, DARK, ICE, WIND]
 
     def __init__(self, type):
+        if not self.is_type_valid(type):
+            self.type = self.UNKNOWN
         self.type = type
 
     def get_type(self) -> str:
@@ -46,6 +48,10 @@ class Element():
                 return WindElement()
             case _:
                 return None
+            
+    @classmethod
+    def is_type_valid(cls, type: str) -> bool:
+        return type.lower() in cls.types
             
 class WaterElement(Element):
 

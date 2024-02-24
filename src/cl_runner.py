@@ -78,7 +78,7 @@ class CLRunner(Host):
     
     def get_element(self) -> str:
         element = input("Please enter element: ")
-        while element.lower() not in Element.types:
+        while not Element.is_type_valid(element):
             element = input("Please enter element: ")
 
         return element
