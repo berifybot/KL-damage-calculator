@@ -1,4 +1,5 @@
 from element_stats import ElementStats
+from status import Status
 
 class Element():
 
@@ -59,8 +60,9 @@ class WaterElement(Element):
         super().__init__(self.WATER)
 
     def apply_status(self, attacker, target) -> ElementStats:
-        target.add_status("Slip")
-        return ElementStats("Slip")
+        applied_status = Status.create("slip")
+        target.add_status(applied_status)
+        return ElementStats(applied_status)
 
     def has_low_chance(self) -> bool:
         return False
@@ -71,8 +73,9 @@ class FireElement(Element):
         super().__init__(self.FIRE)
 
     def apply_status(self, attacker, target) -> ElementStats:
-        target.add_status("Burn")
-        return ElementStats("Burn")
+        applied_status = Status.create("burn")
+        target.add_status(applied_status)
+        return ElementStats(applied_status)
 
     def has_low_chance(self) -> bool:   
         return False
@@ -83,8 +86,9 @@ class LightningElement(Element):
         super().__init__(self.LIGHTNING)
 
     def apply_status(self, attacker, target) -> ElementStats:
-        target.add_status("Paralyze")
-        return ElementStats("Paralyze")
+        applied_status = Status.create("paralyze")
+        target.add_status(applied_status)
+        return ElementStats(applied_status)
     
     def has_low_chance(self) -> bool:
         return True
@@ -96,8 +100,9 @@ class EarthElement(Element):
         super().__init__(self.EARTH)
 
     def apply_status(self, attacker, target) -> ElementStats:
-        target.add_status("Rooted")
-        return ElementStats("Rooted")
+        applied_status = Status.create("rooted")
+        target.add_status(applied_status)
+        return ElementStats(applied_status)
 
     def has_low_chance(self) -> bool:
         return False
@@ -108,8 +113,9 @@ class LightElement(Element):
         super().__init__(self.LIGHT)
 
     def apply_status(self, attacker, target) -> ElementStats:
-        attacker.add_status("Blessed")
-        return ElementStats("Blessed")
+        applied_status = Status.create("blessed")
+        attacker.add_status(applied_status)
+        return ElementStats(applied_status)
 
     def has_low_chance(self) -> bool:
         return False
@@ -120,8 +126,9 @@ class DarkElement(Element):
         super().__init__(self.DARK)
 
     def apply_status(self, attacker, target) -> ElementStats:
-        target.add_status("Cursed")
-        return ElementStats("Cursed")
+        applied_status = Status.create("rooted")
+        target.add_status(applied_status)
+        return ElementStats(applied_status)
 
     def has_low_chance(self) -> bool:
         return False
@@ -132,8 +139,9 @@ class IceElement(Element):
         super().__init__(self.ICE)
 
     def apply_status(self, attacker, target) -> ElementStats:
-        target.add_status("Freeze")
-        return ElementStats("Freeze")
+        applied_status = Status.create("cursed")
+        target.add_status(applied_status)
+        return ElementStats(applied_status)
     
     def has_low_chance(self) -> bool:
         return False
@@ -144,8 +152,9 @@ class WindElement(Element):
         super().__init__(self.WIND)
 
     def apply_status(self, attacker, target) -> ElementStats:
-        target.add_status("Airborn")
-        return ElementStats("Airborn")
+        applied_status = Status.create("airborn")
+        target.add_status(applied_status)
+        return ElementStats(applied_status)
 
     def has_low_chance(self) -> bool:
         return True

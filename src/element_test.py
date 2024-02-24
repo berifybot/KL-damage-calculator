@@ -1,5 +1,6 @@
 import unittest
 from element import Element
+from mock_objects import TestEnemyCreator, TestPlayerCreator, TestWeaponCreator
 
 class TestElement(unittest.TestCase):
 
@@ -26,6 +27,15 @@ class TestElement(unittest.TestCase):
     def test_valid_creation_mixed_case(self):
         valid_element = Element.create("fIRe")
         self.assertEqual(valid_element.get_type(), "fire")
+
+    def test_apply_status_returns_valid_status(self):
+        weapon = TestWeaponCreator.create()
+        player = TestPlayerCreator.create(weapon=weapon)
+        enemy = TestEnemyCreator.create(weapon=None)
+        fire_elem: Element = Element.create("fire")
+        stats = fire_elem.apply_status(player, enemy)
+        self.assertTrue(stats.applied_status.type == "burn")
+
 
 if __name__ == '__main__':
     unittest.main()

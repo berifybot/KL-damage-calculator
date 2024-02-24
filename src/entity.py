@@ -1,10 +1,11 @@
 from typing import List
 from damage_source import Weapon
 from element import Element
+from status import Status
 
 class Entity():
 
-    statuses: List[str] = []
+    statuses: List[Status] = []
 
     def __init__(self, name: str, max_health: int, weapon: Weapon, weaknesses: List[str] = []):
         self.name = name
@@ -48,7 +49,7 @@ class Entity():
                 return True
         return False
     
-    def add_status(self, status: str) -> None:
+    def add_status(self, status: Status) -> None:
         self.statuses.append(status)
     
 class Player(Entity):

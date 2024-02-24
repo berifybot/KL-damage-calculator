@@ -7,7 +7,7 @@ class AttackStats:
         self.attacker = attacker
         self.target = target
         self.damage_dealt = 0
-        self.status_applied = ""
+        self.status_applied = None
         self.hit_weakness = False
         self.base_roll = 0
         self.critical_roll = 0

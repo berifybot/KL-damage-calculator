@@ -69,7 +69,7 @@ class CLBattle(BattleHost):
             print("You rolled a {crit} for your crit roll.".format(crit = stats.critical_roll))
         if stats.did_crit:
             print("You successfully hit a critical on the {target}!".format(target = stats.target.get_name()))
-            print("You applied {status} to the {target}!".format(status = stats.status_applied, target = stats.target.get_name()))
+            print("You applied {status} to the {target}!".format(status = stats.status_applied.type, target = stats.target.get_name()))
         if stats.hit_weakness:
             print("You exploited the {target}'s weakness!".format(target = stats.target.get_name()))
         print("You dealt {damage} damage to the {target}".format(damage = stats.damage_dealt, target=stats.target.name))

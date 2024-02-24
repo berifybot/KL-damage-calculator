@@ -1,9 +1,10 @@
 from element_stats import ElementStats
+from status import Status
 
 class RollStats:
     
     def __init__(self):
-        self.applied_status = ""
+        self.applied_status = None
         self.hit_weakness = False
         self.base_roll = 0
         self.critical_roll = 0
@@ -13,7 +14,7 @@ class RollStats:
     def set_element_stats(self, element_stats: ElementStats) -> None:
         self.applied_status = element_stats.get_applied_status()
 
-    def get_applied_status(self) -> str:
+    def get_applied_status(self) -> Status:
         return self.applied_status
     
     def set_hit_weakness(self, hit_weakness: bool) -> None:
