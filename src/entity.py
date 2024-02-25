@@ -2,10 +2,10 @@ from typing import List
 from damage_source import Weapon
 from element import Element
 from status import Status
+from status_stats import StatusesStats
 
 class Entity():
 
-    statuses: List[Status] = []
 
     def __init__(self, name: str, max_health: int, weapon: Weapon, weaknesses: List[str] = []):
         self.name = name
@@ -14,6 +14,7 @@ class Entity():
         self.weapon = weapon
         self.weaknesses = self.__convert_weaknesses__(weaknesses)
         self.increased_status_effect_chance = False
+        self.statuses: List[Status] = []
 
     def __convert_weaknesses__(self, weaknesses: List[str]) -> List[Element]:
         converted_weaknesses: List[Element] = []
@@ -48,6 +49,13 @@ class Entity():
             if weakness.get_type() == element.get_type():
                 return True
         return False
+    
+    def handle_end_of_turn_statuses(self, statuses_stats) -> StatusesStats:
+        for status in self.statuses:
+            status_stats = status.end_of_turn()
+            if status_stats is not None:
+                statuses_stats.add_status(status_stats)
+        return StatusesStats
     
     def add_status(self, status: Status) -> None:
         self.statuses.append(status)

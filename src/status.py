@@ -1,3 +1,5 @@
+from status_stats import StatusStats
+
 class Status():
 
     BURN = "burn"
@@ -44,6 +46,14 @@ class Status():
     
     def __init__(self, type: str):
         self.type = type
+        self.applier = None
+        self.rolls_remaining = 0
+
+    def end_of_turn(self) -> StatusStats:
+        return None
+
+    def set_applier(self, applier) -> None:
+        self.applier = applier
 
     @classmethod
     def create(cls, type: str) -> None:
@@ -128,10 +138,33 @@ class Status():
 class Burn(Status):
     def __init__(self) -> None:
         super().__init__(self.BURN)
+        self.rolls_remaining = 4
+
+    def end_of_turn(self) -> StatusStats:
+        stats = StatusStats(self.type)
+        stats.damage_dealt = 5
+        self.rolls_remaining -= 1
+        stats.rolls_remaining = self.rolls_remaining
+        return stats
+
+    def is_expired(self) -> bool:
+        return self.rolls_remaining == 0
+
 
 class Freeze(Status):
     def __init__(self) -> None:
         super().__init__(self.FREEZE)
+        self.rolls_remaining = 4
+
+    def end_of_turn(self) -> StatusStats:
+        stats = StatusStats(self.type)
+        stats.damage_dealt = 4
+        self.rolls_remaining -= 1
+        stats.rolls_remaining = self.rolls_remaining
+        return stats
+
+    def is_expired(self) -> bool:
+        return self.rolls_remaining == 0
 
 class Paralize(Status):
     def __init__(self) -> None:
@@ -156,6 +189,17 @@ class Bleed(Status):
 class Poison(Status):
     def __init__(self) -> None:
         super().__init__(self.POISON)
+        self.rolls_remaining = 10
+
+    def end_of_turn(self) -> StatusStats:
+        stats = StatusStats(self.type)
+        stats.damage_dealt = 3
+        self.rolls_remaining -= 1
+        stats.rolls_remaining = self.rolls_remaining
+        return stats
+
+    def is_expired(self) -> bool:
+        return self.rolls_remaining ==  0
 
 class Concussed(Status):
     def __init__(self) -> None:

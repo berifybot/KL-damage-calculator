@@ -59,8 +59,8 @@ class CLBattle(BattleHost):
         return attack_type
     
     def roll(self) -> int:
-        # return int(input("Enter Roll Value: "))
-        return Roll.random_roll()
+        return int(input("Enter Roll Value: "))
+        # return Roll.random_roll()
     
     def report_roll_stats(self, stats: AttackStats):
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
@@ -72,6 +72,10 @@ class CLBattle(BattleHost):
             print("You applied {status} to the {target}!".format(status = stats.status_applied.type, target = stats.target.get_name()))
         if stats.hit_weakness:
             print("You exploited the {target}'s weakness!".format(target = stats.target.get_name()))
+        if len(stats.statuses_stats.statuses) > 0:
+            for status in stats.statuses_stats.statuses:
+                print("The {target} took {damage} damage from {status}".format(target=stats.target.get_name(), damage = status.damage_dealt, status = status.type))
+                print("{status} has {rolls} rolls remaining".format(status=status.type, rolls=status.rolls_remaining))
         print("You dealt {damage} damage to the {target}".format(damage = stats.damage_dealt, target=stats.target.name))
         print("The {enemy} now has {health} HP remaining".format(enemy = stats.target.name, health = stats.target.current_health))
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")

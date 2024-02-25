@@ -3,6 +3,7 @@ from entity import Entity
 from battle_host import BattleHost
 from attack_stats import AttackStats
 from roll_stats import RollStats
+from status_stats import StatusesStats
 
 class Attack():
 
@@ -11,6 +12,7 @@ class Attack():
         self.attacker = attacker
         self.target = target
         self.roll_stats = RollStats()
+        self.statuses_stats = StatusesStats()
         self.attack_stats = AttackStats(attacker, target)
 
     def attack(self) -> AttackStats:
@@ -19,6 +21,8 @@ class Attack():
         damage_dealt = self.execute_roll(roll) 
         self.attack_stats.set_damage_dealt(damage_dealt)
         self.attack_stats.set_roll_stats(self.roll_stats)
+        self.__end_of_roll_status_handling__()
+        self.attack_stats.set_statuses_stats(self.statuses_stats)
         self.host.report_roll_stats(self.attack_stats)
 
     def execute_roll(self, roll) -> int:
@@ -88,3 +92,7 @@ class Attack():
         if (status_roll == 6):
             return True
         return False
+    
+    def __end_of_roll_status_handling__(self) -> None:
+        self.attacker.handle_end_of_turn_statuses(self.statuses_stats)
+        self.target.handle_end_of_turn_statuses(self.statuses_stats)

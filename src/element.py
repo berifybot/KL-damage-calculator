@@ -61,6 +61,7 @@ class WaterElement(Element):
 
     def apply_status(self, attacker, target) -> ElementStats:
         applied_status = Status.create("slip")
+        applied_status.set_applier(attacker)
         target.add_status(applied_status)
         return ElementStats(applied_status)
 
@@ -74,6 +75,7 @@ class FireElement(Element):
 
     def apply_status(self, attacker, target) -> ElementStats:
         applied_status = Status.create("burn")
+        applied_status.set_applier(attacker)
         target.add_status(applied_status)
         return ElementStats(applied_status)
 
@@ -87,6 +89,7 @@ class LightningElement(Element):
 
     def apply_status(self, attacker, target) -> ElementStats:
         applied_status = Status.create("paralyze")
+        applied_status.set_applier(attacker)
         target.add_status(applied_status)
         return ElementStats(applied_status)
     
@@ -101,6 +104,7 @@ class EarthElement(Element):
 
     def apply_status(self, attacker, target) -> ElementStats:
         applied_status = Status.create("rooted")
+        applied_status.set_applier(attacker)
         target.add_status(applied_status)
         return ElementStats(applied_status)
 
@@ -114,6 +118,7 @@ class LightElement(Element):
 
     def apply_status(self, attacker, target) -> ElementStats:
         applied_status = Status.create("blessed")
+        applied_status.set_applier(attacker)
         attacker.add_status(applied_status)
         return ElementStats(applied_status)
 
@@ -127,6 +132,7 @@ class DarkElement(Element):
 
     def apply_status(self, attacker, target) -> ElementStats:
         applied_status = Status.create("rooted")
+        applied_status.set_applier(attacker)
         target.add_status(applied_status)
         return ElementStats(applied_status)
 
@@ -140,6 +146,7 @@ class IceElement(Element):
 
     def apply_status(self, attacker, target) -> ElementStats:
         applied_status = Status.create("cursed")
+        applied_status.set_applier(attacker)
         target.add_status(applied_status)
         return ElementStats(applied_status)
     
@@ -153,6 +160,7 @@ class WindElement(Element):
 
     def apply_status(self, attacker, target) -> ElementStats:
         applied_status = Status.create("airborn")
+        applied_status.set_applier(attacker)
         target.add_status(applied_status)
         return ElementStats(applied_status)
 

@@ -1,5 +1,6 @@
 from entity import Entity
 from roll_stats import RollStats
+from status_stats import StatusesStats
 
 class AttackStats:
 
@@ -12,6 +13,7 @@ class AttackStats:
         self.base_roll = 0
         self.critical_roll = 0
         self.did_crit = False
+        self.statuses_stats = None
 
     def set_damage_dealt(self, damage) -> None:
         self.damage_dealt = damage
@@ -22,3 +24,6 @@ class AttackStats:
         self.base_roll = roll_stats.get_base_roll()
         self.critical_roll = roll_stats.get_critical_roll()
         self.did_crit = roll_stats.get_did_crit()
+
+    def set_statuses_stats(self, statuses_stats: StatusesStats) -> None:
+        self.statuses_stats = statuses_stats
