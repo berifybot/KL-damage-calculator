@@ -58,6 +58,8 @@ class Entity():
         return StatusesStats
     
     def add_status(self, status: Status) -> None:
+        if status.type in list(map(lambda status: status.type, self.statuses)):
+            return
         self.statuses.append(status)
 
     def take_damage(self, type: Status | DamageSource, amount: int) -> None:
