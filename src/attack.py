@@ -19,7 +19,7 @@ class Attack():
         roll = self.host.roll()
         self.roll_stats.set_base_roll(roll)
         damage_dealt = self.execute_roll(roll) 
-        self.attack_stats.set_damage_dealt(damage_dealt)
+        self.attack_stats.set_damage_dealt(damage_dealt, self.attacker.weapon)
         self.attack_stats.set_roll_stats(self.roll_stats)
         self.__end_of_roll_status_handling__()
         self.attack_stats.set_statuses_stats(self.statuses_stats)
@@ -30,10 +30,10 @@ class Attack():
         if self.target.is_weak_to_element(self.attacker.weapon.get_element()):
             self.roll_stats.set_hit_weakness(True)
             damage_dealt += 10
-            self.target.current_health -= damage_dealt
+            self.target.take_damage(self.attacker.weapon, damage_dealt)
             return damage_dealt
         else:
-            self.target.current_health -= damage_dealt
+            self.target.take_damage(self.attacker.weapon, damage_dealt)
             return damage_dealt
 
     def __get_damage_from_roll__(self, roll) -> int:
@@ -96,3 +96,10 @@ class Attack():
     def __end_of_roll_status_handling__(self) -> None:
         self.attacker.handle_end_of_turn_statuses(self.statuses_stats)
         self.target.handle_end_of_turn_statuses(self.statuses_stats)
+        self.__deal_end_of_turn_damage__()
+
+    def __deal_end_of_turn_damage__(self) -> None:
+        for status in self.statuses_stats.statuses:
+            if status.damage_dealt == 0:
+                return
+            self.target.take_damage(status, status.damage_dealt)

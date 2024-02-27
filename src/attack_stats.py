@@ -1,6 +1,7 @@
 from entity import Entity
 from roll_stats import RollStats
 from status_stats import StatusesStats
+from damage_source import DamageSource
 
 class AttackStats:
 
@@ -8,6 +9,7 @@ class AttackStats:
         self.attacker = attacker
         self.target = target
         self.damage_dealt = 0
+        self.damage_source = None
         self.status_applied = None
         self.hit_weakness = False
         self.base_roll = 0
@@ -15,7 +17,8 @@ class AttackStats:
         self.did_crit = False
         self.statuses_stats = None
 
-    def set_damage_dealt(self, damage) -> None:
+    def set_damage_dealt(self, damage, source: DamageSource) -> None:
+        self.damage_source = source
         self.damage_dealt = damage
 
     def set_roll_stats(self, roll_stats: RollStats) -> None:
@@ -27,3 +30,13 @@ class AttackStats:
 
     def set_statuses_stats(self, statuses_stats: StatusesStats) -> None:
         self.statuses_stats = statuses_stats
+
+    def get_total_damage(self) -> int:
+        status_damage = self.__get_status_damage__()
+        return status_damage + self.damage_dealt
+
+    def __get_status_damage__(self) -> int:
+        total = 0
+        for status in self.statuses_stats.statuses:
+            total += status.damage_dealt
+        return total

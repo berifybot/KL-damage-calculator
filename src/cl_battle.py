@@ -59,7 +59,7 @@ class CLBattle(BattleHost):
         return attack_type
     
     def roll(self) -> int:
-        return int(input("Enter Roll Value: "))
+        return int(input("Enter Roll Value: ") or 1)
         # return Roll.random_roll()
     
     def report_roll_stats(self, stats: AttackStats):
@@ -75,8 +75,9 @@ class CLBattle(BattleHost):
         if len(stats.statuses_stats.statuses) > 0:
             for status in stats.statuses_stats.statuses:
                 print("The {target} took {damage} damage from {status}".format(target=stats.target.get_name(), damage = status.damage_dealt, status = status.type))
-                print("{status} has {rolls} rolls remaining".format(status=status.type, rolls=status.rolls_remaining))
-        print("You dealt {damage} damage to the {target}".format(damage = stats.damage_dealt, target=stats.target.name))
+                print("\t{status} has {rolls} rolls remaining".format(status=status.type, rolls=status.rolls_remaining))
+        print("You dealt {damage} damage with a {source}".format(damage = stats.damage_dealt, target=stats.target.name, source=stats.damage_source.name))
+        print("You dealt a total of {total} to {enemy}".format(total = stats.get_total_damage(), enemy=stats.target.name))
         print("The {enemy} now has {health} HP remaining".format(enemy = stats.target.name, health = stats.target.current_health))
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
         input("Press 'Enter' to continue...")

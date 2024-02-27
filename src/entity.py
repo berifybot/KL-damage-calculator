@@ -1,5 +1,5 @@
 from typing import List
-from damage_source import Weapon
+from damage_source import Weapon, DamageSource
 from element import Element
 from status import Status
 from status_stats import StatusesStats
@@ -59,6 +59,10 @@ class Entity():
     
     def add_status(self, status: Status) -> None:
         self.statuses.append(status)
+
+    def take_damage(self, type: Status | DamageSource, amount: int) -> None:
+        self.current_health -= amount
+        
     
 class Player(Entity):
     def __init__(self, name: str, max_health: int, weapon: Weapon, attack_speed: int, weaknesses: List[str] = []):

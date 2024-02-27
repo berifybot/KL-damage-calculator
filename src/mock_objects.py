@@ -39,7 +39,7 @@ class TestPlayerCreator():
     
     @classmethod
     def createDefaultPlayer(cls):
-        weapon = Weapon("Sword", 50, "water", "melee")
+        weapon = Weapon("Sword", 50, "fire", "melee")
         return Player("Default", 500, weapon, 3)
     
 class TestWeaponCreator():
