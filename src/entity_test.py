@@ -2,6 +2,8 @@ import unittest
 from entity import Enemy, Player
 from element import Element
 from mock_objects import TestEnemyCreator
+from status import Status
+from status_stats import StatusesStats
 
 
 dragon_dict = {
@@ -42,7 +44,36 @@ class TestEntity(unittest.TestCase):
         is_weak_to = enemy.is_weak_to_element(element)
 
         self.assertEqual(is_weak_to, True)
-        
+
+    def test_end_of_turn_statuses_expire(self):
+        enemy = TestEnemyCreator.create(None)
+        status = Status.create("burn")
+        enemy.add_status(status)
+
+        self.assertTrue(len(enemy.statuses) == 1)
+
+        status.rolls_remaining = 1
+        enemy.handle_end_of_turn_statuses(StatusesStats())
+
+        self.assertTrue(len(enemy.statuses) == 0)
+
+    def test_end_of_turn_statuses_deal_damage(self):
+        enemy = TestEnemyCreator.create(None, max_health=50)
+        status = Status.create("burn")
+        enemy.add_status(status)
+        status.rolls_remaining = 2
+        enemy.handle_end_of_turn_statuses(StatusesStats())
+        self.assertTrue(enemy.current_health == 45)
+
+    def test_end_of_turn_statuses_deal_damage_before_expiring(self):
+        enemy = TestEnemyCreator.create(None, max_health=50)
+        status = Status.create("burn")
+        enemy.add_status(status)
+        status.rolls_remaining = 1
+        enemy.handle_end_of_turn_statuses(StatusesStats())
+        self.assertTrue(len(enemy.statuses) == 0)
+        self.assertTrue(enemy.current_health == 45)
+
 
 class TestEnemy(unittest.TestCase):
 

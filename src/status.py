@@ -55,6 +55,9 @@ class Status():
     def set_applier(self, applier) -> None:
         self.applier = applier
 
+    def is_expired(self) -> bool:
+        return False
+
     @classmethod
     def create(cls, type: str) -> None:
         match type.lower():

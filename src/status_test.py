@@ -19,5 +19,11 @@ class TestStatus(unittest.TestCase):
         valid_status = Status.create("burn")
         self.assertIsNotNone(valid_status)
 
+    def test_status_expires(self):
+        burn = Status.create("burn")
+        burn.rolls_remaining = 1
+        burn.end_of_turn()
+        self.assertTrue(burn.is_expired)
+
 if __name__ == '__main__':
     unittest.main()

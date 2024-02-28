@@ -96,10 +96,3 @@ class Attack():
     def __end_of_roll_status_handling__(self) -> None:
         self.attacker.handle_end_of_turn_statuses(self.statuses_stats)
         self.target.handle_end_of_turn_statuses(self.statuses_stats)
-        self.__deal_end_of_turn_damage__()
-
-    def __deal_end_of_turn_damage__(self) -> None:
-        for status in self.statuses_stats.statuses:
-            if status.damage_dealt == 0:
-                return
-            self.target.take_damage(status, status.damage_dealt)

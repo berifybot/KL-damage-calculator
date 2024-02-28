@@ -53,9 +53,15 @@ class Entity():
     def handle_end_of_turn_statuses(self, statuses_stats) -> StatusesStats:
         for status in self.statuses:
             status_stats = status.end_of_turn()
+            if status.is_expired():
+                self.__remove_status__(status)
             if status_stats is not None:
+                self.take_damage(status, status_stats.damage_dealt)
                 statuses_stats.add_status(status_stats)
         return StatusesStats
+    
+    def __remove_status__(self, search_status: Status) -> None:
+        self.statuses = [status for status in self.statuses if status.type != search_status.type]
     
     def add_status(self, status: Status) -> None:
         if status.type in list(map(lambda status: status.type, self.statuses)):
