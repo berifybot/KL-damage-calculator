@@ -1,3 +1,4 @@
+from damage_source import DamageSource
 from element_stats import ElementStats
 from status import Status
 
@@ -10,6 +11,9 @@ class RollStats:
         self.critical_roll = 0
         self.did_crit = False
         
+    def set_damage_dealt(self, damage, source: DamageSource) -> None:
+        self.damage_source = source
+        self.damage_dealt = damage
 
     def set_element_stats(self, element_stats: ElementStats) -> None:
         self.applied_status = element_stats.get_applied_status()
@@ -40,4 +44,10 @@ class RollStats:
 
     def get_did_crit(self) -> bool:
         return self.did_crit
+    
+    def get_damage_dealt(self) -> int:
+        return self.damage_dealt
+    
+    def get_damage_source(self) -> DamageSource:
+        return self.damage_source
     
