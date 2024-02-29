@@ -5,7 +5,7 @@ from mock_objects import TestBattleHost, TestPlayerCreator, TestEnemyCreator, Te
 class TestAttack(unittest.TestCase):
 
     def test_default_creation(self):
-        host = TestBattleHost(2, 25, "Melee", 1)
+        host = TestBattleHost(2, 25, "Melee", lambda: 1)
         enemy = TestEnemyCreator().create(None)
         weapon = TestWeaponCreator().create()
         player = TestPlayerCreator.create(weapon)
