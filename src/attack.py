@@ -23,13 +23,7 @@ class Attack():
 
     def execute_roll(self) -> RollStats:
         roll_stats = self.__get_damage_from_roll__()
-        # Move this logic to entity
-        if self.target.is_weak_to_element(self.attacker.weapon.get_element()):
-            roll_stats.set_hit_weakness(True)
-            roll_stats.damage_dealt += 10
-            self.target.take_damage(self.attacker.weapon, roll_stats.damage_dealt)
-        else:
-            self.target.take_damage(self.attacker.weapon, roll_stats.damage_dealt)
+        self.target.check_weakness(self.attacker, roll_stats)
         return roll_stats
         
     def __get_damage_from_roll__(self) -> RollStats:

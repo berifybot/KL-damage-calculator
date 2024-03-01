@@ -3,6 +3,7 @@ from damage_source import Weapon, DamageSource
 from element import Element
 from status import Status
 from status_stats import StatusesStats
+from roll_stats import RollStats
 
 class Entity():
 
@@ -43,6 +44,14 @@ class Entity():
     
     def set_increased_status_effect_chance(self, value: bool) -> None:
         self.increased_status_effect_chance = value
+
+    def check_weakness(self, attacker, roll_stats: RollStats) -> RollStats:
+        if self.is_weak_to_element(attacker.weapon.get_element()):
+            roll_stats.set_hit_weakness(True)
+            roll_stats.damage_dealt += 10
+            self.take_damage(attacker.weapon, roll_stats.damage_dealt)
+        else:
+            self.take_damage(attacker.weapon, roll_stats.damage_dealt)
 
     def is_weak_to_element(self, element: Element) -> bool:
         for weakness in self.weaknesses:
