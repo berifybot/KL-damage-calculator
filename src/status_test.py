@@ -1,5 +1,6 @@
 import unittest
-from status import Status
+from status import Status, Burn
+
 
 class TestStatus(unittest.TestCase):
 
@@ -24,6 +25,12 @@ class TestStatus(unittest.TestCase):
         burn.rolls_remaining = 1
         burn.end_of_turn()
         self.assertTrue(burn.is_expired)
+
+    def test_flat_dmg_end_of_turn(self):
+        burn: Burn = Status.create("burn")
+        status_stats = burn.end_of_turn()
+        
+        self.assertFalse(status_stats.damage_dealt == 0)
 
 if __name__ == '__main__':
     unittest.main()
