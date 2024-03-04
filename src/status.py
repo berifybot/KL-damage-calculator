@@ -46,6 +46,7 @@ class Status():
     
     def __init__(self, type: str):
         self.type = type
+        self.category = ""
         self.applier = None
         self.rolls_remaining = 0
 
@@ -142,9 +143,10 @@ class Burn(Status):
     def __init__(self) -> None:
         super().__init__(self.BURN)
         self.rolls_remaining = 4
+        self.category = "flat_end"
 
     def end_of_turn(self) -> StatusStats:
-        stats = StatusStats(self.type)
+        stats = StatusStats(self.type, self.category)
         stats.damage_dealt = 5
         self.rolls_remaining -= 1
         stats.rolls_remaining = self.rolls_remaining
@@ -160,7 +162,7 @@ class Freeze(Status):
         self.rolls_remaining = 4
 
     def end_of_turn(self) -> StatusStats:
-        stats = StatusStats(self.type)
+        stats = StatusStats(self.type, self.category)
         stats.damage_dealt = 4
         self.rolls_remaining -= 1
         stats.rolls_remaining = self.rolls_remaining
@@ -195,7 +197,7 @@ class Poison(Status):
         self.rolls_remaining = 10
 
     def end_of_turn(self) -> StatusStats:
-        stats = StatusStats(self.type)
+        stats = StatusStats(self.type, self.category)
         stats.damage_dealt = 3
         self.rolls_remaining -= 1
         stats.rolls_remaining = self.rolls_remaining

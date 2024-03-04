@@ -5,6 +5,7 @@ from turn import Turn
 from typing import List
 from entity import Player, Enemy
 from attack_stats import AttackStats
+from status_stats import StatusStatPrinter
 
 class CLBattle(BattleHost):
 
@@ -74,8 +75,9 @@ class CLBattle(BattleHost):
             print("You exploited the {target}'s weakness!".format(target = stats.target.get_name()))
         if len(stats.statuses_stats.statuses) > 0:
             for status in stats.statuses_stats.statuses:
-                print("The {target} took {damage} damage from {status}".format(target=stats.target.get_name(), damage = status.damage_dealt, status = status.type))
-                print("\t{status} has {rolls} rolls remaining".format(status=status.type, rolls=status.rolls_remaining))
+                status_printer = StatusStatPrinter.create(status)
+                status_string = status_printer.get_stats_string()
+                print(status_string)
         print("You dealt {damage} damage with a {source}".format(damage = stats.damage_dealt, target=stats.target.name, source=stats.damage_source.name))
         print("You dealt a total of {total} to {enemy}".format(total = stats.get_total_damage(), enemy=stats.target.name))
         print("The {enemy} now has {health} HP remaining".format(enemy = stats.target.name, health = stats.target.current_health))
